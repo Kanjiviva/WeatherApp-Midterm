@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <scenes>
+        <!--Weather List Table View Controller-->
+        <scene sceneID="sNG-IT-B8J">
+            <objects>
+                <tableViewController id="PDV-b5-NZS" customClass="WeatherListTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="nyy-tZ-FAd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Bxt-4r-yXa" customClass="CustomTableViewCell">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bxt-4r-yXa" id="8BG-DE-gxF">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxC-tr-0Wg">
+                                            <rect key="frame" x="8" y="0.0" width="42" height="43.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XEp-wP-bKX">
+                                            <rect key="frame" x="558" y="8" width="34" height="27.5"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="XEp-wP-bKX" firstAttribute="top" secondItem="8BG-DE-gxF" secondAttribute="top" constant="8" id="6PX-Ss-9x5"/>
+                                        <constraint firstAttribute="trailing" secondItem="XEp-wP-bKX" secondAttribute="trailing" constant="8" id="Wx7-oo-PHr"/>
+                                        <constraint firstItem="pxC-tr-0Wg" firstAttribute="leading" secondItem="8BG-DE-gxF" secondAttribute="leading" constant="8" id="bq0-dR-A9P"/>
+                                        <constraint firstAttribute="bottom" secondItem="pxC-tr-0Wg" secondAttribute="bottom" id="mOI-6S-icX"/>
+                                        <constraint firstAttribute="bottom" secondItem="XEp-wP-bKX" secondAttribute="bottom" constant="8" id="sUb-6z-NeE"/>
+                                        <constraint firstItem="pxC-tr-0Wg" firstAttribute="top" secondItem="8BG-DE-gxF" secondAttribute="top" id="ylj-7P-JOv"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="locationLabel" destination="pxC-tr-0Wg" id="uw4-bx-sbg"/>
+                                    <outlet property="temperatureLabel" destination="XEp-wP-bKX" id="bk1-FO-avZ"/>
+                                    <segue destination="9pv-A4-QxB" kind="show" identifier="showWeatherDetail" id="78A-3G-0yn"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="PDV-b5-NZS" id="WUl-8R-IHz"/>
+                            <outlet property="delegate" destination="PDV-b5-NZS" id="kqh-2h-1Kh"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="nVW-6r-nPO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qQ2-KK-auz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1470" y="-303"/>
+        </scene>
+        <!--Weather-->
+        <scene sceneID="hNz-n2-bh7">
+            <objects>
+                <viewController id="9pv-A4-QxB" customClass="WeatherViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
+                        <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="h6a-mU-usQ">
+                                <rect key="frame" x="281" y="506" width="39" height="37"/>
+                            </pageControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="h6a-mU-usQ" secondAttribute="bottom" constant="8" id="mjN-rd-4Kk"/>
+                            <constraint firstItem="h6a-mU-usQ" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="pFs-Vr-lKH"/>
+                            <constraint firstItem="h6a-mU-usQ" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" id="vzG-tF-elG"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="vzG-tF-elG"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Weather" image="Thermometer-26" id="acW-dT-cKf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2132" y="-303"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="wg7-f3-ORb">
+            <objects>
+                <viewController id="8rJ-Kc-sve" customClass="MapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
+                        <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kei-7c-wuo">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outlet property="delegate" destination="8rJ-Kc-sve" id="GLl-FA-QT0"/>
+                                    <outletCollection property="gestureRecognizers" destination="lPB-TJ-SXY" appends="YES" id="aci-bX-qo6"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="kei-7c-wuo" secondAttribute="bottom" id="236-db-UZy"/>
+                            <constraint firstAttribute="trailing" secondItem="kei-7c-wuo" secondAttribute="trailing" id="IDh-bp-iSa"/>
+                            <constraint firstItem="kei-7c-wuo" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="nk6-O5-zn7"/>
+                            <constraint firstItem="kei-7c-wuo" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="top" id="yry-qH-LD7"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Map" image="Map Marker-26" id="cPa-gy-q4n"/>
+                    <connections>
+                        <outlet property="mapView" destination="kei-7c-wuo" id="yKW-XS-J1S"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="lPB-TJ-SXY">
+                    <connections>
+                        <action selector="tapRecognizer:" destination="8rJ-Kc-sve" id="OM7-3Q-hKk"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="750" y="360"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="yl2-sM-qoP">
+            <objects>
+                <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
+                        <rect key="frame" x="0.0" y="975" width="768" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="xe3-Gy-4mr" kind="relationship" relationship="viewControllers" id="bIf-2d-KTr"/>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-436" y="-19"/>
+        </scene>
+        <!--Weather-->
+        <scene sceneID="omo-UA-5SK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xe3-Gy-4mr" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Weather" image="Thermometer-26" id="dVc-Kt-Nbx"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WCp-Eg-rDC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="PDV-b5-NZS" kind="relationship" relationship="rootViewController" id="w0O-lO-PA7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cph-Va-6lM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="658" y="-303"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Map Marker-26" width="26" height="26"/>
+        <image name="Thermometer-26" width="26" height="26"/>
+    </resources>
+</document>
