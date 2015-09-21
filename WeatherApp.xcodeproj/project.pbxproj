@@ -27,6 +27,8 @@
 		AA4C1CB71BAF519F0032B50F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4C1CB61BAF519F0032B50F /* CoreData.framework */; };
 		AA4C1CBA1BAF55600032B50F /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1CB91BAF55600032B50F /* CustomTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		AA4C1CBD1BAF56920032B50F /* WeatherListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1CBC1BAF56920032B50F /* WeatherListTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		AA4C1CC11BAF62880032B50F /* WeatherSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1CC01BAF62880032B50F /* WeatherSearchViewController.m */; settings = {ASSET_TAGS = (); }; };
+		AA4C1CC41BAF6B1A0032B50F /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1CC31BAF6B1A0032B50F /* Location.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +86,10 @@
 		AA4C1CBB1BAF56920032B50F /* WeatherListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeatherListTableViewController.h; path = Assets.xcassets/WeatherListTableViewController.h; sourceTree = "<group>"; };
 		AA4C1CBC1BAF56920032B50F /* WeatherListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeatherListTableViewController.m; path = Assets.xcassets/WeatherListTableViewController.m; sourceTree = "<group>"; };
 		AA4C1CBE1BAF5BF50032B50F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		AA4C1CBF1BAF62880032B50F /* WeatherSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherSearchViewController.h; sourceTree = "<group>"; };
+		AA4C1CC01BAF62880032B50F /* WeatherSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherSearchViewController.m; sourceTree = "<group>"; };
+		AA4C1CC21BAF6B1A0032B50F /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = WeatherApp/Location.h; sourceTree = "<group>"; };
+		AA4C1CC31BAF6B1A0032B50F /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Location.m; path = WeatherApp/Location.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +153,8 @@
 				AA4C1C531BAE20FE0032B50F /* MapViewController.h */,
 				AA4C1C541BAE20FE0032B50F /* MapViewController.m */,
 				AA4C1C561BAE20FE0032B50F /* Main.storyboard */,
+				AA4C1CBF1BAF62880032B50F /* WeatherSearchViewController.h */,
+				AA4C1CC01BAF62880032B50F /* WeatherSearchViewController.m */,
 				AA4C1CBB1BAF56920032B50F /* WeatherListTableViewController.h */,
 				AA4C1CBC1BAF56920032B50F /* WeatherListTableViewController.m */,
 				AA4C1CB81BAF55600032B50F /* CustomTableViewCell.h */,
@@ -207,6 +215,8 @@
 				AA4C1C881BAE227C0032B50F /* Weather.h */,
 				AA4C1C891BAE227C0032B50F /* Weather.m */,
 				AA4C1CAA1BAED0720032B50F /* Model.xcdatamodeld */,
+				AA4C1CC21BAF6B1A0032B50F /* Location.h */,
+				AA4C1CC31BAF6B1A0032B50F /* Location.m */,
 				AA4C1CB31BAF513E0032B50F /* DataStack.h */,
 				AA4C1CB41BAF513E0032B50F /* DataStack.m */,
 			);
@@ -348,8 +358,10 @@
 				AA4C1C8A1BAE227C0032B50F /* Weather.m in Sources */,
 				AA4C1C551BAE20FE0032B50F /* MapViewController.m in Sources */,
 				AA4C1CB21BAED0E40032B50F /* WeatherLocation.m in Sources */,
+				AA4C1CC11BAF62880032B50F /* WeatherSearchViewController.m in Sources */,
 				AA4C1C871BAE226F0032B50F /* MapPin.m in Sources */,
 				AA4C1CBA1BAF55600032B50F /* CustomTableViewCell.m in Sources */,
+				AA4C1CC41BAF6B1A0032B50F /* Location.m in Sources */,
 				AA4C1CB11BAED0E40032B50F /* WeatherLocation+CoreDataProperties.m in Sources */,
 				AA4C1CAC1BAED0720032B50F /* Model.xcdatamodeld in Sources */,
 				AA4C1C4F1BAE20FE0032B50F /* AppDelegate.m in Sources */,

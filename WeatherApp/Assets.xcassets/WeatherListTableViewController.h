@@ -11,7 +11,9 @@
 #import "DataStack.h"
 #import "Constants.h"
 #import "CustomTableViewCell.h"
+#import "WeatherSearchViewController.h"
+#import "Location.h"
 
-@interface WeatherListTableViewController : UITableViewController
+@interface WeatherListTableViewController : UITableViewController <WeatherSearchViewControllerDelegate>
 
 @end
