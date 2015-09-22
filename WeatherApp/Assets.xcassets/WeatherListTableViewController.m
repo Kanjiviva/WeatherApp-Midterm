@@ -7,12 +7,14 @@
 //
 
 #import "WeatherListTableViewController.h"
+#import "WeatherLocation.h"
 
 @interface WeatherListTableViewController ()
 
 //@property (strong, nonatomic) NSString *searchItem;
 
 @property (strong, nonatomic) NSMutableArray *weathers;
+@property (strong, nonatomic) WeatherLocation *weatherLocation;
 
 @end
 
@@ -28,6 +30,8 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
      self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    self.dataStack = [DataStack new];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,7 +40,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self.tableView reloadData];
+    [self reloadLocation];
 }
 
 #pragma mark - Helper Method -
@@ -44,80 +48,33 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"showSearch"]) {
-        WeatherSearchViewController *weatherSearchVC = segue.destinationViewController;
+//        WeatherSearchViewController *weatherSearchVC = segue.destinationViewController;
         
-        weatherSearchVC.delegate = self;
         
+    } else if ([segue.identifier isEqualToString:@"showWeatherDetail"]) {
+        
+        WeatherDetailViewController *weatherVC = segue.destinationViewController;
+        
+        weatherVC.weatherLocation = self.weatherLocation;
     }
     
 }
 
-- (void)cityName:(Location *)location {
+- (void)reloadLocation {
     
-    [self.weathers addObject:location];
+    NSFetchRequest *fetch = [NSFetchRequest fetchRequestWithEntityName:@"WeatherLocation"];
     
+    //    fetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"todoTitle" ascending:YES]];
+    
+    NSError *fetchError = nil;
+    NSArray *allWeathers = [self.dataStack.context executeFetchRequest:fetch error:&fetchError];
+    
+    NSLog(@"all weathers lists are: %@", allWeathers);
+    
+    self.weathers = [allWeathers mutableCopy];
+    
+    [self.tableView reloadData];
 }
-
-//- (void)cityName:(NSString *)cityName {
-//    
-//    
-//    NSString *stringURL = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@&APPID=%@", cityName, API_KEY];
-//    
-//    self.searchItem = [stringURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-//    
-//    [self jsonRequest:self.searchItem];
-//}
-//
-//- (float)convertToCelsius:(float)kelvin {
-//    
-//    float celsius;
-//    
-//    celsius = kelvin - 273.15;
-//    
-//    return celsius;
-//}
-//
-//#pragma mark - JSON request -
-//
-//- (void)jsonRequest:(NSString *)searchString {
-//    
-//    NSURLSession *session = [NSURLSession sharedSession];
-//    
-//    NSURLSessionTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:searchString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-//        
-//        if (!error) {
-//            
-//            NSError *jsonError = nil;
-//            
-//            NSDictionary *weatherDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
-//            
-//            NSString *name = [weatherDict objectForKey:@"name"];
-//            
-//            NSDictionary *main = [weatherDict objectForKey:@"main"];
-//            NSNumber *temperature = [main objectForKey:@"temp"];
-//            
-//            NSString *cod = [weatherDict objectForKey:@"cod"];
-//            
-//            if ([cod isEqualToString:@"404"]) {
-//                NSLog(@"Testing");
-//                
-//            }
-//            
-//            float temp = [self convertToCelsius:[temperature floatValue]];
-//            
-//            Location *location = [[Location alloc] initWithCity:name temperature:[NSNumber numberWithFloat:temp]];
-//            
-//            [self.weathers addObject:location];
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [self.tableView reloadData];
-//            });
-//        }
-//        
-//        
-//    }];
-//    
-//    [dataTask resume];
-//}
 
 #pragma mark - Table view data source -
 
@@ -137,10 +94,11 @@
     CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     // Configure the cell...
-    Location *location = self.weathers[indexPath.row];
+    WeatherLocation *weahterLocation = self.weathers[indexPath.row];
     
-    cell.locationLabel.text = location.cityName;
-    cell.temperatureLabel.text = [NSString stringWithFormat:@"%.1f C", [location.temperature floatValue]];
+    cell.locationLabel.text = weahterLocation.locationName;
+    cell.temperatureLabel.text = [NSString stringWithFormat:@"%.1f C", weahterLocation.currentTemperature];
+    cell.countryLabel.text = weahterLocation.country;
     
     return cell;
 }
@@ -154,6 +112,18 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        WeatherLocation *weatherLocation = self.weathers[indexPath.row];
+        
+        [self.dataStack.context deleteObject:weatherLocation];
+        
+        NSError *saveError = nil;
+        
+        if (![self.dataStack.context save:&saveError]) {
+            NSLog(@"Save failed! %@", saveError);
+        }
+        
+        
         [self.weathers removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {

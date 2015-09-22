@@ -2,7 +2,7 @@
 //  WeatherLocation+CoreDataProperties.m
 //  WeatherApp
 //
-//  Created by Steve on 2015-09-20.
+//  Created by Steve on 2015-09-21.
 //  Copyright © 2015 Steve. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -13,10 +13,16 @@
 
 @implementation WeatherLocation (CoreDataProperties)
 
-@dynamic location;
 @dynamic currentTemperature;
-@dynamic lowestTemperature;
-@dynamic highestTemperature;
 @dynamic currentWeather;
+@dynamic highestTemperature;
+@dynamic locationName;
+@dynamic lowestTemperature;
+@dynamic weatherDescription;
+@dynamic date;
+@dynamic country;
+@dynamic longitude;
+@dynamic latitude;
+@dynamic condition;
 
 @end

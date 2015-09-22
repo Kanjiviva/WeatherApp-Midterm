@@ -8,12 +8,18 @@
 
 #import "WeatherSearchViewController.h"
 #import "Constants.h"
+#import "WeatherLocation.h"
+#import "SearchTableViewCell.h"
 
-@interface WeatherSearchViewController ()
+@interface WeatherSearchViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 @property (strong, nonatomic) NSString *searchItem;
 @property (strong, nonatomic) NSMutableArray *weathers;
+
+@property (strong, nonatomic) Location *location;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSURLSessionTask *dataTask;
 
 @end
 
@@ -24,6 +30,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.weathers = [NSMutableArray new];
+    self.dataStack = [DataStack new];
+    
+    self.searchTextField.delegate = self;
+    
+    [self.searchTextField addTarget:self
+                             action:@selector(searchingTextField)
+                   forControlEvents:UIControlEventEditingChanged];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,9 +47,13 @@
 
 #pragma mark - Helper Method -
 
+- (void)searchingTextField {
+    [self searchCity];
+}
+
 - (void)searchCity {
     
-    NSString *stringURL = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@&APPID=%@", self.searchTextField.text, API_KEY];
+    NSString *stringURL = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/find?q=%@&type=like&APPID=%@", self.searchTextField.text, API_KEY];
     
     self.searchItem = [stringURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
@@ -51,58 +69,123 @@
     return celsius;
 }
 
+- (void)createEntity{
+    
+    WeatherLocation *weatherLocation = [NSEntityDescription insertNewObjectForEntityForName:@"WeatherLocation" inManagedObjectContext:self.dataStack.context];
+    
+    weatherLocation.locationName = self.location.cityName;
+    weatherLocation.currentTemperature = [self.location.temperature floatValue];
+    weatherLocation.country = self.location.country;
+    weatherLocation.longitude = [self.location.longitude floatValue];
+    weatherLocation.latitude = [self.location.latitude floatValue];
+    weatherLocation.condition = self.location.condition;
+    
+    NSLog(@"lat %f lon %f", weatherLocation.latitude, weatherLocation.longitude);
+    
+    NSError *saveError = nil;
+    
+    if (![self.dataStack.context save:&saveError]) {
+        NSLog(@"Save failed! %@", saveError);
+    }
+    
+    
+}
+
 #pragma mark - JSON request -
 
 - (void)jsonRequest:(NSString *)searchString {
     
     NSURLSession *session = [NSURLSession sharedSession];
     
-    NSURLSessionTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:searchString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    [self.dataTask suspend];
+    [self.dataTask cancel];
+    
+    self.dataTask = [session dataTaskWithURL:[NSURL URLWithString:searchString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
         if (!error) {
             
+            NSMutableArray *newWeathers = [NSMutableArray array];
             NSError *jsonError = nil;
             
             NSDictionary *weatherDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
             
-            NSString *name = [weatherDict objectForKey:@"name"];
+            NSArray *lists = [weatherDict objectForKey:@"list"];
             
-            NSDictionary *main = [weatherDict objectForKey:@"main"];
-            NSNumber *temperature = [main objectForKey:@"temp"];
+            for (NSDictionary *list in lists) {
+                
+                NSString *name = [list objectForKey:@"name"];
+                
+                NSDictionary *coord = [list objectForKey:@"coord"];
+                NSNumber *lon = [coord objectForKey:@"lon"];
+                NSNumber *lat = [coord objectForKey:@"lat"];
+                
+                NSDictionary *main = [list objectForKey:@"main"];
+                NSNumber *temperature = [main objectForKey:@"temp"];
+                
+                NSDictionary *sys = [list objectForKey:@"sys"];
+                NSString *country = [sys objectForKey:@"country"];
+                
+                NSArray *weather = [list objectForKey:@"weather"];
+                NSString *condition = [[weather objectAtIndex:0] objectForKey:@"main"];
+                
+                float temp = [self convertToCelsius:[temperature floatValue]];
+                
+                self.location = [[Location alloc] initWithCity:name temperature:[NSNumber numberWithFloat:temp] country:country longitude:lon latitude:lat condition:condition];
+                
+                [newWeathers addObject:self.location];
+            }
             
-//            NSString *cod = [weatherDict objectForKey:@"cod"];
-//            
-//            if ([cod isEqualToString:@"404"]) {
-//                NSLog(@"Testing");
-//                
-//            }
             
-            float temp = [self convertToCelsius:[temperature floatValue]];
             
-            Location *location = [[Location alloc] initWithCity:name temperature:[NSNumber numberWithFloat:temp]];
-            
-//            [self.weathers addObject:location];
             dispatch_async(dispatch_get_main_queue(), ^{
-//                [self.tableView reloadData];
-                [self.delegate cityName:location];
+                
+                self.weathers = newWeathers;
+                
+                
+                [self.tableView reloadData];
             });
         }
         
         
     }];
     
-    [dataTask resume];
+    [self.dataTask resume];
 }
 
-#pragma mark - IBAction -
+#pragma mark - Table view datasource -
 
-- (IBAction)addLocation:(UIButton *)sender {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.weathers count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self searchCity];
+    SearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
+    Location *location = self.weathers[indexPath.row];
     
+    cell.cityLabel.text = location.cityName;
+    cell.countryLabel.text = location.country;
     
-//    [self.navigationController popViewControllerAnimated:YES];
+    return cell;
+}
+
+#pragma mark - Table view delegate -
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self createEntity];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - Textfield delegate -
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.searchTextField resignFirstResponder];
+    return YES;
 }
 
 @end

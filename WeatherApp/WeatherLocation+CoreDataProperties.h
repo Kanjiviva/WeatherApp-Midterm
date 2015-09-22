@@ -2,7 +2,7 @@
 //  WeatherLocation+CoreDataProperties.h
 //  WeatherApp
 //
-//  Created by Steve on 2015-09-20.
+//  Created by Steve on 2015-09-21.
 //  Copyright © 2015 Steve. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,11 +15,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WeatherLocation (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSString *location;
-@property (nonatomic) int16_t currentTemperature;
-@property (nonatomic) int16_t lowestTemperature;
-@property (nullable, nonatomic, retain) NSString *highestTemperature;
+@property (nonatomic) float currentTemperature;
 @property (nullable, nonatomic, retain) NSString *currentWeather;
+@property (nonatomic) float highestTemperature;
+@property (nullable, nonatomic, retain) NSString *locationName;
+@property (nonatomic) float lowestTemperature;
+@property (nullable, nonatomic, retain) NSString *weatherDescription;
+@property (nullable, nonatomic, retain) NSString *date;
+@property (nullable, nonatomic, retain) NSString *country;
+@property (nonatomic) float longitude;
+@property (nonatomic) float latitude;
+@property (nullable, nonatomic , retain) NSString *condition;
 
 @end
 

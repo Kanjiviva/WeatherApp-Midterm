@@ -12,12 +12,17 @@
 #import "MapPin.h"
 #import "Weather.h"
 #import "Constants.h"
+#import "DataStack.h"
+#import <CoreData/CoreData.h>
 
 @interface MapViewController : UIViewController
+
+@property (strong, nonatomic) DataStack *dataStack;
 
 @property (strong, nonatomic) CLLocation *currentLocation;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
+- (void)favoriteLocationsPin;
 
 @end
 

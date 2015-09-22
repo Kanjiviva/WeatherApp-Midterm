@@ -6,13 +6,13 @@
 //  Copyright © 2015 Steve. All rights reserved.
 //
 
-#import "WeatherViewController.h"
+#import "WeatherDetailViewController.h"
 
-@interface WeatherViewController ()
+@interface WeatherDetailViewController ()
 
 @end
 
-@implementation WeatherViewController
+@implementation WeatherDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

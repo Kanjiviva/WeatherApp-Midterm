@@ -7,6 +7,7 @@
 //
 
 #import "MapViewController.h"
+#import "WeatherLocation.h"
 
 @interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
@@ -15,6 +16,10 @@
 @property (strong, nonatomic) UIImage *iconImage;
 
 @property (strong, nonatomic) NSMutableArray *weathers;
+
+@property (strong, nonatomic) NSMutableArray *allLists;
+
+@property (strong, nonatomic) NSMutableArray *allPins;
 
 @end
 
@@ -26,9 +31,17 @@
     [super viewDidLoad];
     self.mapView.delegate = self;
     
+    self.dataStack = [DataStack new];
+    
     self.weathers = [NSMutableArray new];
     
-    [self setUpLocation];
+    self.allLists = [NSMutableArray new];
+    self.allPins = [NSMutableArray new];
+    
+    [self startLocationManager];
+    
+    [self favoriteLocationsPin];
+    
     
 }
 
@@ -37,7 +50,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Helper Methods -
+- (void)viewWillAppear:(BOOL)animated {
+    [self favoriteLocationsPin];
+}
+
+#pragma mark - Location Manager -
 
 - (void)setUpLocation {
     self.locationManager = [[CLLocationManager alloc] init];
@@ -46,12 +63,15 @@
     self.locationManager.distanceFilter = 10; // whenever we move
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation; // 100 m
     
-    self.mapView.showsUserLocation = YES;
+    
+    
     [_locationManager requestWhenInUseAuthorization];
+    
+    self.mapView.showsUserLocation = YES;
     
     [_locationManager startUpdatingLocation];
     
-    [self zoomInLocation];
+    
 }
 
 - (void)startLocationManager{
@@ -74,23 +94,6 @@
     }
 }
 
-- (float)convertToCelsius:(float)kelvin {
-    
-    float celsius;
-    
-    celsius = kelvin - 273.15;
-    
-    return celsius;
-}
-
-#pragma mark - Location Manager Delegate -
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    
-    self.currentLocation = [locations objectAtIndex:0];
-    
-}
-
 - (void)zoomInLocation {
     
     NSLog(@"Zoom - IN");
@@ -108,6 +111,72 @@
     [self.mapView setRegion:region animated:YES];
     
 }
+
+#pragma mark - Location Manager Delegate -
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    if (! self.currentLocation) {
+        self.currentLocation = [locations objectAtIndex:0];
+        [self zoomInLocation];
+    } else {
+        self.currentLocation = [locations objectAtIndex:0];
+    }
+}
+
+#pragma mark - Helper Methods -
+
+- (float)convertToCelsius:(float)kelvin {
+    
+    float celsius;
+    
+    celsius = kelvin - 273.15;
+    
+    return celsius;
+}
+
+- (void)favoriteLocationsPin {
+    
+    [self reloadLocation];
+    
+    if ([self.allLists count] != 0) {
+        for (WeatherLocation *weatherLocation in self.allLists) {
+            MapPin *pin = [[MapPin alloc] initWithCoordinate:CLLocationCoordinate2DMake(weatherLocation.latitude, weatherLocation.longitude) andTitle:[NSString stringWithFormat:@"City: %@. Weather: %@", weatherLocation.locationName, weatherLocation.condition] andSubtitle:[NSString stringWithFormat:@"%.1f", weatherLocation.currentTemperature]];
+            
+            NSLog(@"lat %f lon %f", weatherLocation.latitude, weatherLocation.longitude);
+            
+            if ([self.allLists containsObject:weatherLocation]) {
+                [self.mapView removeAnnotation:pin];
+                [self.mapView addAnnotation:pin];
+            } else {
+                [self.mapView removeAnnotation:pin];
+            }
+            
+        }
+    } else {
+        [self.mapView removeAnnotations:[self.mapView annotations]];
+    }
+    
+}
+
+#pragma mark - Fetch Request -
+
+- (void)reloadLocation {
+    
+    NSFetchRequest *fetch = [NSFetchRequest fetchRequestWithEntityName:@"WeatherLocation"];
+    
+    //    fetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"todoTitle" ascending:YES]];
+    
+    NSError *fetchError = nil;
+    NSArray *allWeathers = [self.dataStack.context executeFetchRequest:fetch error:&fetchError];
+    
+    NSLog(@"all weathers lists are: %@", allWeathers);
+    
+    self.allLists = [allWeathers mutableCopy];
+    
+    //    [self.tableView reloadData];
+}
+
 
 #pragma mark - IBActions -
 
@@ -135,7 +204,6 @@
     id<MKAnnotation> mp = [annotationView annotation];
     
     [self.mapView selectAnnotation:mp animated:YES];
-    
 }
 
 #pragma mark - Annotation View -
@@ -144,16 +212,11 @@
     
     if ([annotation isKindOfClass:[MapPin class]]) {
         
-        //        MapPin *myLocation = (MapPin *)annotation;
-        
-        //        MKAnnotationView *annotationView = [self.mapView dequeueReusableAnnotationViewWithIdentifier:@"MapPin"];
-        
         MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MapPin"];
         annotationView.enabled = YES;
         annotationView.canShowCallout = YES;
         annotationView.image = [UIImage imageNamed:@"Map Pin-26.png"];
         annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-        
         
         // View for left accessory
         
@@ -167,16 +230,9 @@
         
         annotationView.leftCalloutAccessoryView=viewLeftAccessory;
         
-        // View for detail accessory
-        
-//        UIView *viewDetailAccessory = [[UIView alloc] initWithFrame:CGRectMake(0, 0, annotationView.frame.size.width, annotationView.frame.size.height)];
-//        
-//        
-//        annotationView.detailCalloutAccessoryView = viewDetailAccessory;
-        
         if (annotationView == nil) {
             //            annotationView = [myLocation annotationView];
-//            annotationView = annotationView;
+            //            annotationView = annotationView;
         } else {
             annotationView.annotation = annotation;
         }
@@ -201,13 +257,7 @@
             
             NSDictionary *weatherDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
             
-            //            NSDictionary *coord = [weatherDict objectForKey:@"coord"];
-            
             NSString *cityName = [weatherDict objectForKey:@"name"];
-            
-            //            NSNumber *lat = [coord objectForKey:@"lat"];
-            //
-            //            NSNumber *lon = [coord objectForKey:@"lon"];
             
             NSDictionary *main = [weatherDict objectForKey:@"main"];
             
@@ -221,9 +271,7 @@
             
             Weather *weather = [[Weather alloc] initWithLng:[NSNumber numberWithFloat:lng]  lat:[NSNumber numberWithFloat:lat] cityName:cityName condition:condition temp:[NSNumber numberWithFloat:temperatureInCelsius]];
             
-            //            Weather *weather = [[Weather alloc] initWithLng:lon lat:lat cityName:cityName condition:main];
-            
-            MapPin *pin = [[MapPin alloc] initWithCoordinate:CLLocationCoordinate2DMake(lat, lng) andTitle:[NSString stringWithFormat:@"Current Weather: %@", condition] andSubtitle:[NSString stringWithFormat:@"%.1f C", temperatureInCelsius]];
+            MapPin *pin = [[MapPin alloc] initWithCoordinate:CLLocationCoordinate2DMake(lat, lng) andTitle:[NSString stringWithFormat:@"City: %@. Weather: %@",cityName, condition] andSubtitle:[NSString stringWithFormat:@"%.1f C", temperatureInCelsius]];
             
             if ([condition isEqualToString:@"Rain"]) {
                 self.iconImage = [UIImage imageNamed:@"Rain-26.png"];
@@ -238,8 +286,19 @@
             NSLog(@"Location lat %f, lon %f ", lat, lng);
             
             [self.weathers addObject:weather];
+            
+            [self.allPins addObject:pin];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.mapView addAnnotation:pin];
+                
+                if (![self.allPins containsObject:pin]) {
+                    [self.mapView addAnnotation:pin];
+                } else {
+                    [self.mapView removeAnnotations:self.allPins];
+                    [self.mapView addAnnotation:pin];
+                }
+                
+                
+                
             });
             
         }

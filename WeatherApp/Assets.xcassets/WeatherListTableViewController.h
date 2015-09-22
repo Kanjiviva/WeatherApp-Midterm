@@ -13,7 +13,10 @@
 #import "CustomTableViewCell.h"
 #import "WeatherSearchViewController.h"
 #import "Location.h"
+#import "WeatherDetailViewController.h"
 
-@interface WeatherListTableViewController : UITableViewController <WeatherSearchViewControllerDelegate>
+@interface WeatherListTableViewController : UITableViewController 
+
+@property (strong, nonatomic) DataStack *dataStack;
 
 @end

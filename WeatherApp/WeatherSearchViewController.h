@@ -8,17 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Location.h"
-
-@protocol WeatherSearchViewControllerDelegate <NSObject>
-
-- (void)cityName:(Location *)location;
-
-@end
-
-
+#import "DataStack.h"
 
 @interface WeatherSearchViewController : UIViewController
 
-@property (strong, nonatomic) id<WeatherSearchViewControllerDelegate> delegate;
+@property (strong, nonatomic) DataStack *dataStack;
 
 @end

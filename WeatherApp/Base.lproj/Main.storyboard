@@ -27,6 +27,12 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RwU-Hc-EKS">
+                                            <rect key="frame" x="58" y="0.0" width="42" height="43.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GP4-9d-yFA">
                                             <rect key="frame" x="8" y="0.0" width="42" height="43.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -35,6 +41,8 @@
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="RwU-Hc-EKS" firstAttribute="top" secondItem="8BG-DE-gxF" secondAttribute="top" id="0Ea-L6-r7g"/>
+                                        <constraint firstItem="RwU-Hc-EKS" firstAttribute="centerY" secondItem="8BG-DE-gxF" secondAttribute="centerY" id="6Y4-On-sgk"/>
                                         <constraint firstItem="PDH-4s-Psw" firstAttribute="trailing" secondItem="8BG-DE-gxF" secondAttribute="trailingMargin" id="I7Y-WK-UBl"/>
                                         <constraint firstItem="PDH-4s-Psw" firstAttribute="top" secondItem="8BG-DE-gxF" secondAttribute="topMargin" constant="3" id="JCH-g6-XKe"/>
                                         <constraint firstItem="GP4-9d-yFA" firstAttribute="centerY" secondItem="8BG-DE-gxF" secondAttribute="centerY" id="KzA-MW-AiU"/>
@@ -42,10 +50,13 @@
                                         <constraint firstAttribute="bottom" secondItem="GP4-9d-yFA" secondAttribute="bottom" id="ViF-CP-OIM"/>
                                         <constraint firstItem="PDH-4s-Psw" firstAttribute="centerY" secondItem="8BG-DE-gxF" secondAttribute="centerY" id="Xgw-7O-bse"/>
                                         <constraint firstItem="GP4-9d-yFA" firstAttribute="leading" secondItem="8BG-DE-gxF" secondAttribute="leading" constant="8" id="bo2-gY-Dyh"/>
+                                        <constraint firstAttribute="bottom" secondItem="RwU-Hc-EKS" secondAttribute="bottom" id="e7K-dg-h5O"/>
                                         <constraint firstItem="GP4-9d-yFA" firstAttribute="top" secondItem="8BG-DE-gxF" secondAttribute="top" id="ufZ-aR-gUn"/>
+                                        <constraint firstItem="RwU-Hc-EKS" firstAttribute="leading" secondItem="GP4-9d-yFA" secondAttribute="trailing" constant="8" id="w6U-Zz-r16"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="countryLabel" destination="RwU-Hc-EKS" id="SWo-JQ-cQ9"/>
                                     <outlet property="locationLabel" destination="GP4-9d-yFA" id="8uI-MX-Nft"/>
                                     <outlet property="temperatureLabel" destination="PDH-4s-Psw" id="kXX-aC-RiH"/>
                                     <segue destination="9pv-A4-QxB" kind="show" identifier="showWeatherDetail" id="78A-3G-0yn"/>
@@ -67,7 +78,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qQ2-KK-auz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1470" y="-303"/>
+            <point key="canvasLocation" x="954" y="347"/>
         </scene>
         <!--Weather Search View Controller-->
         <scene sceneID="cS2-7w-U6w">
@@ -85,36 +96,82 @@
                                 <rect key="frame" x="20" y="72" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rxS-CZ-bJX">
-                                <rect key="frame" x="255" y="110" width="90" height="30"/>
-                                <state key="normal" title="Add Location"/>
                                 <connections>
-                                    <action selector="addLocation:" destination="Cq4-sJ-Egs" eventType="touchUpInside" id="L01-gU-O9l"/>
+                                    <outlet property="delegate" destination="Cq4-sJ-Egs" id="6On-1c-2O1"/>
                                 </connections>
-                            </button>
+                            </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LvH-fM-gJQ">
+                                <rect key="frame" x="20" y="110" width="560" height="441"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Qbr-h4-yMV" customClass="SearchTableViewCell">
+                                        <rect key="frame" x="0.0" y="28" width="560" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qbr-h4-yMV" id="smh-IW-kyB">
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iYm-Uf-03p">
+                                                    <rect key="frame" x="8" y="0.0" width="42" height="43.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ct-Wh-BuU">
+                                                    <rect key="frame" x="58" y="0.0" width="42" height="43.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="iYm-Uf-03p" firstAttribute="centerY" secondItem="smh-IW-kyB" secondAttribute="centerY" id="CW5-Su-bFL"/>
+                                                <constraint firstItem="2Ct-Wh-BuU" firstAttribute="top" secondItem="smh-IW-kyB" secondAttribute="top" id="Kgg-Fy-bLP"/>
+                                                <constraint firstItem="iYm-Uf-03p" firstAttribute="top" secondItem="smh-IW-kyB" secondAttribute="top" id="LKT-eA-ZnP"/>
+                                                <constraint firstItem="2Ct-Wh-BuU" firstAttribute="centerY" secondItem="smh-IW-kyB" secondAttribute="centerY" id="R63-Lj-Zjw"/>
+                                                <constraint firstAttribute="bottom" secondItem="2Ct-Wh-BuU" secondAttribute="bottom" id="baE-Gz-3n7"/>
+                                                <constraint firstAttribute="bottom" secondItem="iYm-Uf-03p" secondAttribute="bottom" id="hdM-v0-5m0"/>
+                                                <constraint firstItem="2Ct-Wh-BuU" firstAttribute="leading" secondItem="iYm-Uf-03p" secondAttribute="trailing" constant="8" id="luq-JZ-Kfy"/>
+                                                <constraint firstItem="iYm-Uf-03p" firstAttribute="leading" secondItem="smh-IW-kyB" secondAttribute="leading" constant="8" id="qnO-Ke-3nn"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cityLabel" destination="iYm-Uf-03p" id="9NX-uZ-2C0"/>
+                                            <outlet property="countryLabel" destination="2Ct-Wh-BuU" id="Oc8-hl-rFc"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Cq4-sJ-Egs" id="fZ1-Ht-xki"/>
+                                    <outlet property="delegate" destination="Cq4-sJ-Egs" id="rZq-iF-lTN"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="0T7-vU-3Iw" firstAttribute="leading" secondItem="IBX-FG-3TU" secondAttribute="leadingMargin" id="6ka-1j-pCC"/>
                             <constraint firstItem="0T7-vU-3Iw" firstAttribute="trailing" secondItem="IBX-FG-3TU" secondAttribute="trailingMargin" id="DfX-yk-RHB"/>
-                            <constraint firstItem="rxS-CZ-bJX" firstAttribute="top" secondItem="0T7-vU-3Iw" secondAttribute="bottom" constant="8" id="EgB-ZT-m8B"/>
-                            <constraint firstItem="rxS-CZ-bJX" firstAttribute="centerX" secondItem="IBX-FG-3TU" secondAttribute="centerX" id="nux-Jx-mXc"/>
+                            <constraint firstItem="LvH-fM-gJQ" firstAttribute="trailing" secondItem="IBX-FG-3TU" secondAttribute="trailingMargin" id="FRv-Ym-emV"/>
+                            <constraint firstItem="LvH-fM-gJQ" firstAttribute="top" secondItem="0T7-vU-3Iw" secondAttribute="bottom" constant="8" id="MnL-0q-bab"/>
+                            <constraint firstItem="74u-DJ-qHk" firstAttribute="top" secondItem="LvH-fM-gJQ" secondAttribute="bottom" id="QBt-ZU-ile"/>
                             <constraint firstItem="0T7-vU-3Iw" firstAttribute="top" secondItem="OtR-hD-EHb" secondAttribute="bottom" constant="8" id="uAL-tB-bae"/>
+                            <constraint firstItem="LvH-fM-gJQ" firstAttribute="leading" secondItem="IBX-FG-3TU" secondAttribute="leadingMargin" id="udT-eO-Yit"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="0vP-pc-o3T"/>
                     <connections>
                         <outlet property="searchTextField" destination="0T7-vU-3Iw" id="AlX-Rq-ALm"/>
+                        <outlet property="tableView" destination="LvH-fM-gJQ" id="sap-IF-bh9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rH5-1k-sR5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2193" y="-618"/>
+            <point key="canvasLocation" x="1988" y="-142"/>
         </scene>
         <!--Weather-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="WeatherViewController" sceneMemberID="viewController">
+                <viewController id="9pv-A4-QxB" customClass="WeatherDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -128,7 +185,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2193" y="189"/>
+            <point key="canvasLocation" x="1805" y="747"/>
         </scene>
         <!--Map-->
         <scene sceneID="wg7-f3-ORb">
@@ -159,7 +216,13 @@
                             <constraint firstItem="kei-7c-wuo" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="top" id="yry-qH-LD7"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" image="Map Marker-26" id="cPa-gy-q4n"/>
+                    <navigationItem key="navigationItem" title="Map" id="Tbj-qN-oVB">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="DND-1c-hJD">
+                            <connections>
+                                <segue destination="Cq4-sJ-Egs" kind="show" identifier="showSearch" id="6gC-wb-f96"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="kei-7c-wuo" id="yKW-XS-J1S"/>
                     </connections>
@@ -171,7 +234,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="658" y="360"/>
+            <point key="canvasLocation" x="974" y="-406"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -184,19 +247,19 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <segue destination="Wap-is-Q8W" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="xe3-Gy-4mr" kind="relationship" relationship="viewControllers" id="bIf-2d-KTr"/>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-436" y="-19"/>
         </scene>
-        <!--Weather-->
+        <!--Favorite-->
         <scene sceneID="omo-UA-5SK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xe3-Gy-4mr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Weather" image="Thermometer-26" id="dVc-Kt-Nbx"/>
+                    <tabBarItem key="tabBarItem" title="Favorite" image="Thermometer-26" id="dVc-Kt-Nbx"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WCp-Eg-rDC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -209,11 +272,33 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cph-Va-6lM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="658" y="-303"/>
+            <point key="canvasLocation" x="264" y="347"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="5pH-Tc-Ama">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Wap-is-Q8W" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" image="Map Marker-26" id="cPa-gy-q4n"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="IzP-Zh-rpt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="Hrv-bx-KNX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iT8-36-Fft" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="264" y="-406"/>
         </scene>
     </scenes>
     <resources>
         <image name="Map Marker-26" width="26" height="26"/>
         <image name="Thermometer-26" width="26" height="26"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="6gC-wb-f96"/>
+    </inferredMetricsTieBreakers>
 </document>
