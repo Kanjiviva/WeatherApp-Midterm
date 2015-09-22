@@ -217,6 +217,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="Tbj-qN-oVB">
+                        <barButtonItem key="leftBarButtonItem" image="Worldwide Location-26.png" id="70X-sy-VpF">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="findCurrentLocation:" destination="8rJ-Kc-sve" id="Qb0-Em-ebM"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="DND-1c-hJD">
                             <connections>
                                 <segue destination="Cq4-sJ-Egs" kind="show" identifier="showSearch" id="6gC-wb-f96"/>
@@ -297,6 +303,7 @@
     <resources>
         <image name="Map Marker-26" width="26" height="26"/>
         <image name="Thermometer-26" width="26" height="26"/>
+        <image name="Worldwide Location-26.png" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6gC-wb-f96"/>
