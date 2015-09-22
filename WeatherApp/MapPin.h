@@ -15,6 +15,8 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
 
+@property (nonatomic, strong) NSString *condition;
+
 - (instancetype)initWithCoordinate:(CLLocationCoordinate2D)aCoordinate andTitle:(NSString *)aTitle andSubtitle:(NSString *)aSubtitle;
 //- (MKAnnotationView *)annotationView;
 @end

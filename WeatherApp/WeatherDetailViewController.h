@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "Location.h"
 #import "WeatherLocation.h"
+#import "DataStack.h"
+#import "Constants.h"
 
 @interface WeatherDetailViewController : UIViewController
 
-//@property (strong, nonatomic) DataStack *dataStack;
+@property (strong, nonatomic) DataStack *dataStack;
 @property (strong, nonatomic) WeatherLocation *weatherLocation;
 
 @end

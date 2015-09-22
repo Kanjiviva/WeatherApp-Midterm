@@ -55,7 +55,12 @@
         
         WeatherDetailViewController *weatherVC = segue.destinationViewController;
         
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        
+        self.weatherLocation = self.weathers[indexPath.row];
+        
         weatherVC.weatherLocation = self.weatherLocation;
+        weatherVC.dataStack = self.dataStack;
     }
     
 }

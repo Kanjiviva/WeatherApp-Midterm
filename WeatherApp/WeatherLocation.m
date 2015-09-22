@@ -12,4 +12,17 @@
 
 // Insert code here to add functionality to your managed object subclass
 
+-(CLLocationCoordinate2D)coordinate {
+    return CLLocationCoordinate2DMake(self.latitude, self.longitude);
+}
+
+-(NSString *)title {
+    return [NSString stringWithFormat:@"City: %@. Weather: %@", self.locationName, self.condition];
+}
+
+
+-(NSString *)subtitle {
+    return [NSString stringWithFormat:@"%0.1f",self.currentTemperature];
+}
+
 @end

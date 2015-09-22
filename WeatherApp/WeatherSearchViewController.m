@@ -178,6 +178,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self createEntity];
+    // tell map view about new entry
     [self.navigationController popViewControllerAnimated:YES];
 }
 

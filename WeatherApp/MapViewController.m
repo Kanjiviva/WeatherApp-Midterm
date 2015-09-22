@@ -141,15 +141,20 @@
     
     if ([self.allLists count] != 0) {
         for (WeatherLocation *weatherLocation in self.allLists) {
-            MapPin *pin = [[MapPin alloc] initWithCoordinate:CLLocationCoordinate2DMake(weatherLocation.latitude, weatherLocation.longitude) andTitle:[NSString stringWithFormat:@"City: %@. Weather: %@", weatherLocation.locationName, weatherLocation.condition] andSubtitle:[NSString stringWithFormat:@"%.1f", weatherLocation.currentTemperature]];
+            
+            
+            
+            //MapPin *pin = [[MapPin alloc] initWithCoordinate:CLLocationCoordinate2DMake(weatherLocation.latitude, weatherLocation.longitude) andTitle:[NSString stringWithFormat:@"City: %@. Weather: %@", weatherLocation.locationName, weatherLocation.condition] andSubtitle:[NSString stringWithFormat:@"%.1f", weatherLocation.currentTemperature]];
+            
+            //pin.condition = weatherLocation.condition;
             
             NSLog(@"lat %f lon %f", weatherLocation.latitude, weatherLocation.longitude);
             
             if ([self.allLists containsObject:weatherLocation]) {
-                [self.mapView removeAnnotation:pin];
-                [self.mapView addAnnotation:pin];
+                [self.mapView removeAnnotation:weatherLocation];
+                [self.mapView addAnnotation:weatherLocation];
             } else {
-                [self.mapView removeAnnotation:pin];
+                [self.mapView removeAnnotation:weatherLocation];
             }
             
         }
@@ -210,7 +215,7 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
-    if ([annotation isKindOfClass:[MapPin class]]) {
+    if ([annotation isKindOfClass:[WeatherLocation class]] || [annotation isKindOfClass:[MapPin class]] ) {
         
         MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MapPin"];
         annotationView.enabled = YES;
@@ -223,7 +228,30 @@
         UIView *viewLeftAccessory = [[UIView alloc] initWithFrame:CGRectMake(0, 0, annotationView.frame.size.height, annotationView.frame.size.height)];
         
         UIImageView *temp=[[UIImageView alloc] initWithFrame:CGRectMake(5, 5, annotationView.frame.size.height-5, annotationView.frame.size.height-5)];
-        temp.image = self.iconImage;
+        
+        
+        //if ([annotation isKindOfClass:[WeatherLocation class]] ) {
+            MapPin *weatherLocation = annotation;
+        
+            if ([weatherLocation.condition isEqualToString:@"Rain"]) {
+                temp.image = [UIImage imageNamed:@"Rain-26.png"];
+            } else if ([weatherLocation.condition isEqualToString:@"Clouds"]) {
+                temp.image = [UIImage imageNamed:@"Clouds-26.png"];
+            } else if ([weatherLocation.condition isEqualToString:@"Clear"]) {
+                temp.image = [UIImage imageNamed:@"Sun-24.png"];
+            } else if ([weatherLocation.condition isEqualToString:@"Snow"]) {
+                temp.image = [UIImage imageNamed:@"Snow-24.png"];
+            }
+            
+//        } else {
+//            temp.image = self.iconImage;
+//        }
+        
+        
+
+        
+        
+        
         temp.contentMode = UIViewContentModeScaleAspectFit;
         
         [viewLeftAccessory addSubview:temp];
@@ -273,15 +301,17 @@
             
             MapPin *pin = [[MapPin alloc] initWithCoordinate:CLLocationCoordinate2DMake(lat, lng) andTitle:[NSString stringWithFormat:@"City: %@. Weather: %@",cityName, condition] andSubtitle:[NSString stringWithFormat:@"%.1f C", temperatureInCelsius]];
             
-            if ([condition isEqualToString:@"Rain"]) {
-                self.iconImage = [UIImage imageNamed:@"Rain-26.png"];
-            } else if ([condition isEqualToString:@"Clouds"]) {
-                self.iconImage = [UIImage imageNamed:@"Clouds-26.png"];
-            } else if ([condition isEqualToString:@"Clear"]) {
-                self.iconImage = [UIImage imageNamed:@"Sun-24.png"];
-            } else if ([condition isEqualToString:@"Snow"]) {
-                self.iconImage = [UIImage imageNamed:@"Snow-24.png"];
-            }
+            pin.condition = condition;
+//            
+//            if ([condition isEqualToString:@"Rain"]) {
+//                self.iconImage = [UIImage imageNamed:@"Rain-26.png"];
+//            } else if ([condition isEqualToString:@"Clouds"]) {
+//                self.iconImage = [UIImage imageNamed:@"Clouds-26.png"];
+//            } else if ([condition isEqualToString:@"Clear"]) {
+//                self.iconImage = [UIImage imageNamed:@"Sun-24.png"];
+//            } else if ([condition isEqualToString:@"Snow"]) {
+//                self.iconImage = [UIImage imageNamed:@"Snow-24.png"];
+//            }
             
             NSLog(@"Location lat %f, lon %f ", lat, lng);
             
@@ -309,5 +339,9 @@
     
     [dataTask resume];
 }
+
+// search view did add entry
+
+// zoom in on new entry
 
 @end
