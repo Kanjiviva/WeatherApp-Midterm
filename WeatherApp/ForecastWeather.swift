@@ -18,9 +18,9 @@ class ForecastWeather: NSObject {
     var humidity:Float
     var condition:String
     var weatherDesciption:String
-    var time:Float
+    var time:Double
     
-    init(cityName:String, country:String, currentTemp:Float, highestTemp:Float, lowestTemp:Float, humidity:Float, condition:String, weatherDesciption:String, time:Float) {
+    init(cityName:String, country:String, currentTemp:Float, highestTemp:Float, lowestTemp:Float, humidity:Float, condition:String, weatherDesciption:String, time:Double) {
         self.cityName = cityName
         self.country = country
         self.currentTemp = currentTemp
