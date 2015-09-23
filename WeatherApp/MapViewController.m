@@ -52,7 +52,6 @@
     [self favoriteLocationsPin];
     
     
-    
 }
 
 - (void)didReceiveMemoryWarning {

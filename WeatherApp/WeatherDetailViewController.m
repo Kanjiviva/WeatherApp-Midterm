@@ -47,7 +47,7 @@
     self.tableView.backgroundColor = [UIColor clearColor];
     // Create the colors
     UIColor *topColor = [UIColor colorWithRed:50.0/255.0 green:50.0/255.0 blue:50.0/255.0 alpha:1.0];
-    UIColor *bottomColor = [UIColor colorWithRed:56.0/255.0 green:56.0/255.0 blue:56.0/255.0 alpha:1.0];
+    UIColor *bottomColor = [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0];
     // Create the gradient
     CAGradientLayer *theViewGradient = [CAGradientLayer layer];
     theViewGradient.colors = [NSArray arrayWithObjects: (id)topColor.CGColor, (id)bottomColor.CGColor, nil];
@@ -56,21 +56,11 @@
     
     [self.mainView.layer insertSublayer:theViewGradient atIndex:0];
     
-    //Pull To refresh
-    //    self.refreshControl.layer.zPosition = self.tableView.backgroundView.layer.zPosition + 1;
-    //    self.refreshControl.tintColor = [UIColor whiteColor];
-    
     self.cityLabel.text = self.weatherLocation.locationName;
     self.currentTempLabel.text = [NSString stringWithFormat:@"%.1fºC",self.weatherLocation.currentTemperature];
     self.currentDescriptionLabel.text = self.weatherLocation.condition;
     self.currentImage.image = [self getImage:self.weatherLocation.condition];
     
-}
-
-- (IBAction)refreshWeather:(UIRefreshControl *)sender {
-    
-    [self.tableView reloadData];
-    [sender endRefreshing];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -124,7 +114,7 @@
 
 - (UIImage *)getImage:(NSString *)condition {
     UIImage *image;
-    if ([condition isEqualToString:@"Rain"] || [condition isEqualToString:@"Mist"] ) {
+    if ([condition isEqualToString:@"Rain"]) {
         image = [UIImage imageNamed:@"rain.png"];
     } else if ([condition isEqualToString:@"Clouds"]) {
         image = [UIImage imageNamed:@"cloudy.png"];
@@ -132,6 +122,8 @@
         image = [UIImage imageNamed:@"clear-day.png"];
     } else if ([condition isEqualToString:@"Snow"]) {
         image = [UIImage imageNamed:@"snow.png"];
+    } else if([condition isEqualToString:@"Mist"]) {
+        image = [UIImage imageNamed:@"fog.png"];
     } else {
         image = [UIImage imageNamed:@"default.png"];
     }
