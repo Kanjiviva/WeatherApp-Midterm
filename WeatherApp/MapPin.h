@@ -16,6 +16,9 @@
 @property (nonatomic, copy) NSString *subtitle;
 
 @property (nonatomic, strong) NSString *condition;
+@property (nonatomic, strong) NSString *cityName;
+@property (nonatomic, strong) NSNumber *currentTemp;
+@property (nonatomic, strong) NSString *country;
 
 - (instancetype)initWithCoordinate:(CLLocationCoordinate2D)aCoordinate andTitle:(NSString *)aTitle andSubtitle:(NSString *)aSubtitle;
 //- (MKAnnotationView *)annotationView;

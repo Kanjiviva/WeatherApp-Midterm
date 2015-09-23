@@ -8,7 +8,7 @@
 
 #import "WeatherSearchViewController.h"
 #import "Constants.h"
-#import "WeatherLocation.h"
+
 #import "SearchTableViewCell.h"
 
 @interface WeatherSearchViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
@@ -179,6 +179,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self createEntity];
     // tell map view about new entry
+    [self.delegate newEntry:self.location];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

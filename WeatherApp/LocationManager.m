@@ -30,7 +30,7 @@
     
     self.locationManager.delegate = self;
     self.locationManager.distanceFilter = 10; // whenever we move
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation; // 100 m
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
     [_locationManager requestAlwaysAuthorization];
     [_locationManager startUpdatingLocation];
     
@@ -61,11 +61,12 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
-    if (! self.currentLocation) {
+    if (!self.currentLocation) {
         self.currentLocation = [locations firstObject];
         [self.delegate updateLocation:[locations firstObject]];
     } else {
         self.currentLocation = [locations firstObject];
+//        [self.delegate updateLocation:[locations firstObject]];
     }
 }
 
