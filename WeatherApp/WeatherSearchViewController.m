@@ -17,7 +17,7 @@
 @property (strong, nonatomic) NSString *searchItem;
 @property (strong, nonatomic) NSMutableArray *weathers;
 
-@property (strong, nonatomic) Location *location;
+//@property (strong, nonatomic) Location *location;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSURLSessionTask *dataTask;
 
@@ -69,16 +69,16 @@
     return celsius;
 }
 
-- (void)createEntity{
+- (void)createEntity:(Location *)location{
     
     WeatherLocation *weatherLocation = [NSEntityDescription insertNewObjectForEntityForName:@"WeatherLocation" inManagedObjectContext:self.dataStack.context];
     
-    weatherLocation.locationName = self.location.cityName;
-    weatherLocation.currentTemperature = [self.location.temperature floatValue];
-    weatherLocation.country = self.location.country;
-    weatherLocation.longitude = [self.location.longitude floatValue];
-    weatherLocation.latitude = [self.location.latitude floatValue];
-    weatherLocation.condition = self.location.condition;
+    weatherLocation.locationName = location.cityName;
+    weatherLocation.currentTemperature = [location.temperature floatValue];
+    weatherLocation.country = location.country;
+    weatherLocation.longitude = [location.longitude floatValue];
+    weatherLocation.latitude = [location.latitude floatValue];
+    weatherLocation.condition = location.condition;
     
     NSLog(@"lat %f lon %f", weatherLocation.latitude, weatherLocation.longitude);
     
@@ -130,9 +130,9 @@
                 
                 float temp = [self convertToCelsius:[temperature floatValue]];
                 
-                self.location = [[Location alloc] initWithCity:name temperature:[NSNumber numberWithFloat:temp] country:country longitude:lon latitude:lat condition:condition];
+                Location *location = [[Location alloc] initWithCity:name temperature:[NSNumber numberWithFloat:temp] country:country longitude:lon latitude:lat condition:condition];
                 
-                [newWeathers addObject:self.location];
+                [newWeathers addObject:location];
             }
             
             
@@ -177,9 +177,15 @@
 #pragma mark - Table view delegate -
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self createEntity];
     // tell map view about new entry
-    [self.delegate newEntry:self.location];
+    
+    Location *location = self.weathers[indexPath.row];
+    
+    [self createEntity:location];
+    [self.delegate newEntry:location];
+    
+    
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
