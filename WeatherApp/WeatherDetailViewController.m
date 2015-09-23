@@ -31,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.forecastWeathers = [NSMutableArray new];
+    
     [self searchForecast];
     [self configureView];
     

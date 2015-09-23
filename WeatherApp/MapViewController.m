@@ -8,18 +8,23 @@
 
 #import "MapViewController.h"
 #import "WeatherLocation.h"
+#import "LocationManager.h"
+#import "MapPin.h"
+#import "Weather.h"
+#import "Constants.h"
+#import "WeatherSearchViewController.h"
+#import "Location.h"
 
-@interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
+@interface MapViewController () <MKMapViewDelegate, LocationManagerDelegate, WeatherSearchViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
-@property (strong, nonatomic) UIImage *iconImage;
-
 @property (strong, nonatomic) NSMutableArray *weathers;
-
 @property (strong, nonatomic) NSMutableArray *allLists;
-
 @property (strong, nonatomic) NSMutableArray *allPins;
+
+@property (strong, nonatomic) Location *location;
+//@property (strong, nonatomic) WeatherLocation *weatherLocation;
 
 @end
 
@@ -31,6 +36,8 @@
     [super viewDidLoad];
     self.mapView.delegate = self;
     
+    self.mapView.showsUserLocation = YES;
+    
     self.dataStack = [DataStack new];
     
     self.weathers = [NSMutableArray new];
@@ -38,9 +45,12 @@
     self.allLists = [NSMutableArray new];
     self.allPins = [NSMutableArray new];
     
-    [self startLocationManager];
+    [LocationManager sharedLocationManager].delegate = self;
+    
+    [[LocationManager sharedLocationManager] startLocationManager:self];
     
     [self favoriteLocationsPin];
+    
     
     
 }
@@ -52,49 +62,15 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [self favoriteLocationsPin];
+    
+    
+    [self newEntry:self.location];
+    
 }
 
 #pragma mark - Location Manager -
 
-- (void)setUpLocation {
-    self.locationManager = [[CLLocationManager alloc] init];
-    
-    self.locationManager.delegate = self;
-    self.locationManager.distanceFilter = 10; // whenever we move
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation; // 100 m
-    
-    
-    
-    [_locationManager requestWhenInUseAuthorization];
-    
-    self.mapView.showsUserLocation = YES;
-    
-    [_locationManager startUpdatingLocation];
-    
-    
-}
-
-- (void)startLocationManager{
-    if ([CLLocationManager locationServicesEnabled]) {
-        
-        if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined){
-            [self setUpLocation];
-            
-        }else if (!([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted)){
-            [self setUpLocation];
-            
-        }else{
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Location services are disabled. Please go into Settings > Privacy > Location to enable them for Play "
-                                                                           message:nil
-                                                                    preferredStyle:UIAlertControllerStyleAlert];
-            
-            [self presentViewController:alert animated:YES completion:nil];
-            
-        }
-    }
-}
-
-- (void)zoomInLocation {
+- (void)updateLocation:(CLLocation *)currentLocation {
     
     NSLog(@"Zoom - IN");
     MKCoordinateRegion region;
@@ -102,29 +78,38 @@
     //Set Zoom level using Span
     MKCoordinateSpan span;
     
-    region.center.latitude = _locationManager.location.coordinate.latitude;
-    region.center.longitude = _locationManager.location.coordinate.longitude;
     
-    span.latitudeDelta=_mapView.region.span.latitudeDelta / 15000;
-    span.longitudeDelta=_mapView.region.span.longitudeDelta / 15000;
+    region.center.latitude = currentLocation.coordinate.latitude;
+    region.center.longitude = currentLocation.coordinate.longitude;
+    
+    span.latitudeDelta = _mapView.region.span.latitudeDelta / 10000;
+    span.longitudeDelta = _mapView.region.span.longitudeDelta / 10000;
     region.span=span;
     [self.mapView setRegion:region animated:YES];
     
 }
 
-#pragma mark - Location Manager Delegate -
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    
-    if (! self.currentLocation) {
-        self.currentLocation = [locations objectAtIndex:0];
-        [self zoomInLocation];
-    } else {
-        self.currentLocation = [locations objectAtIndex:0];
-    }
-}
-
 #pragma mark - Helper Methods -
+
+- (void)newEntry:(Location *)location {
+    
+    self.location = location;
+    
+    MKCoordinateRegion region;
+    
+    //Set Zoom level using Span
+    MKCoordinateSpan span;
+    
+    
+    region.center.latitude = [self.location.latitude floatValue];
+    region.center.longitude = [self.location.longitude floatValue];
+    
+    span.latitudeDelta = _mapView.region.span.latitudeDelta / 15000;
+    span.longitudeDelta = _mapView.region.span.longitudeDelta / 15000;
+    region.span=span;
+    [self.mapView setRegion:region animated:YES];
+    
+}
 
 - (float)convertToCelsius:(float)kelvin {
     
@@ -140,22 +125,19 @@
     [self reloadLocation];
     
     if ([self.allLists count] != 0) {
+        
+        
+        [self.mapView removeAnnotations:[self.mapView annotations]];
+        
         for (WeatherLocation *weatherLocation in self.allLists) {
-            
-            
-            
             //MapPin *pin = [[MapPin alloc] initWithCoordinate:CLLocationCoordinate2DMake(weatherLocation.latitude, weatherLocation.longitude) andTitle:[NSString stringWithFormat:@"City: %@. Weather: %@", weatherLocation.locationName, weatherLocation.condition] andSubtitle:[NSString stringWithFormat:@"%.1f", weatherLocation.currentTemperature]];
             
             //pin.condition = weatherLocation.condition;
             
             NSLog(@"lat %f lon %f", weatherLocation.latitude, weatherLocation.longitude);
             
-            if ([self.allLists containsObject:weatherLocation]) {
-                [self.mapView removeAnnotation:weatherLocation];
-                [self.mapView addAnnotation:weatherLocation];
-            } else {
-                [self.mapView removeAnnotation:weatherLocation];
-            }
+            
+            [self.mapView addAnnotation:weatherLocation];
             
         }
     } else {
@@ -213,6 +195,43 @@
 
 #pragma mark - Annotation View -
 
+
+-(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    
+    WeatherLocation *weatherLocation = [NSEntityDescription insertNewObjectForEntityForName:@"WeatherLocation" inManagedObjectContext:self.dataStack.context];
+    
+    for (MapPin *pin in self.allPins) {
+        
+        
+        weatherLocation.latitude = pin.coordinate.latitude;
+        weatherLocation.longitude = pin.coordinate.longitude;
+        weatherLocation.locationName = pin.cityName;
+        weatherLocation.currentTemperature = [pin.currentTemp floatValue];
+        weatherLocation.condition = pin.condition;
+        weatherLocation.country = pin.country;
+        
+        NSError *saveError = nil;
+        
+        if (![self.dataStack.context save:&saveError]) {
+            NSLog(@"Save failed! %@", saveError);
+        }
+        
+        
+        
+    }
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Location Saved!"
+                                                                   message:@"You have saved a location"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+    
+    [alert addAction:action];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    self.tabBarController.selectedIndex = 1;
+}
+
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
     if ([annotation isKindOfClass:[WeatherLocation class]] || [annotation isKindOfClass:[MapPin class]] ) {
@@ -231,26 +250,19 @@
         
         
         //if ([annotation isKindOfClass:[WeatherLocation class]] ) {
-            MapPin *weatherLocation = annotation;
+        MapPin *weatherLocation = annotation;
         
-            if ([weatherLocation.condition isEqualToString:@"Rain"]) {
-                temp.image = [UIImage imageNamed:@"Rain-26.png"];
-            } else if ([weatherLocation.condition isEqualToString:@"Clouds"]) {
-                temp.image = [UIImage imageNamed:@"Clouds-26.png"];
-            } else if ([weatherLocation.condition isEqualToString:@"Clear"]) {
-                temp.image = [UIImage imageNamed:@"Sun-24.png"];
-            } else if ([weatherLocation.condition isEqualToString:@"Snow"]) {
-                temp.image = [UIImage imageNamed:@"Snow-24.png"];
-            }
-            
-//        } else {
-//            temp.image = self.iconImage;
-//        }
-        
-        
-
-        
-        
+        if ([weatherLocation.condition isEqualToString:@"Rain"]) {
+            temp.image = [UIImage imageNamed:@"Rain-26.png"];
+        } else if ([weatherLocation.condition isEqualToString:@"Clouds"]) {
+            temp.image = [UIImage imageNamed:@"Clouds-26.png"];
+        } else if ([weatherLocation.condition isEqualToString:@"Clear"]) {
+            temp.image = [UIImage imageNamed:@"Sun-24.png"];
+        } else if ([weatherLocation.condition isEqualToString:@"Snow"]) {
+            temp.image = [UIImage imageNamed:@"Snow-24.png"];
+        } else if ([weatherLocation.condition isEqualToString:@"Mist"]) {
+            temp.image = [UIImage imageNamed:@"Fog Day-24.png"];
+        }
         
         temp.contentMode = UIViewContentModeScaleAspectFit;
         
@@ -297,21 +309,18 @@
             
             NSString *condition = [[weathers objectAtIndex:0] objectForKey:@"main"];
             
+            NSDictionary *sys = [weatherDict objectForKey:@"sys"];
+            
+            NSString *country = [sys objectForKey:@"country"];
+            
             Weather *weather = [[Weather alloc] initWithLng:[NSNumber numberWithFloat:lng]  lat:[NSNumber numberWithFloat:lat] cityName:cityName condition:condition temp:[NSNumber numberWithFloat:temperatureInCelsius]];
             
             MapPin *pin = [[MapPin alloc] initWithCoordinate:CLLocationCoordinate2DMake(lat, lng) andTitle:[NSString stringWithFormat:@"City: %@. Weather: %@",cityName, condition] andSubtitle:[NSString stringWithFormat:@"%.1f C", temperatureInCelsius]];
             
             pin.condition = condition;
-//            
-//            if ([condition isEqualToString:@"Rain"]) {
-//                self.iconImage = [UIImage imageNamed:@"Rain-26.png"];
-//            } else if ([condition isEqualToString:@"Clouds"]) {
-//                self.iconImage = [UIImage imageNamed:@"Clouds-26.png"];
-//            } else if ([condition isEqualToString:@"Clear"]) {
-//                self.iconImage = [UIImage imageNamed:@"Sun-24.png"];
-//            } else if ([condition isEqualToString:@"Snow"]) {
-//                self.iconImage = [UIImage imageNamed:@"Snow-24.png"];
-//            }
+            pin.cityName = cityName;
+            pin.currentTemp = [NSNumber numberWithFloat:temperatureInCelsius];
+            pin.country = country;
             
             NSLog(@"Location lat %f, lon %f ", lat, lng);
             
@@ -328,16 +337,21 @@
                 }
                 
                 
-                
             });
-            
         }
-        
-        
-        
     }];
     
     [dataTask resume];
+}
+- (IBAction)findCurrentLocation:(UIBarButtonItem *)sender {
+    [self updateLocation:[LocationManager sharedLocationManager].currentLocation];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showSearch"]) {
+        WeatherSearchViewController *weatherSearchVC = segue.destinationViewController;
+        weatherSearchVC.delegate = self;
+    }
 }
 
 // search view did add entry

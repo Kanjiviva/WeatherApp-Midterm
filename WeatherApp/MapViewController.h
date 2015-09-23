@@ -9,9 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
-#import "MapPin.h"
-#import "Weather.h"
-#import "Constants.h"
 #import "DataStack.h"
 #import <CoreData/CoreData.h>
 
@@ -20,7 +17,6 @@
 @property (strong, nonatomic) DataStack *dataStack;
 
 @property (strong, nonatomic) CLLocation *currentLocation;
-@property (strong, nonatomic) CLLocationManager *locationManager;
 
 - (void)favoriteLocationsPin;
 

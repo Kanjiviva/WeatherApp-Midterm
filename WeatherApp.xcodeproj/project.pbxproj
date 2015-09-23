@@ -31,9 +31,9 @@
 		AA4C1CBD1BAF56920032B50F /* WeatherListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1CBC1BAF56920032B50F /* WeatherListTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		AA4C1CC11BAF62880032B50F /* WeatherSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1CC01BAF62880032B50F /* WeatherSearchViewController.m */; settings = {ASSET_TAGS = (); }; };
 		AA4C1CC41BAF6B1A0032B50F /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1CC31BAF6B1A0032B50F /* Location.m */; settings = {ASSET_TAGS = (); }; };
-		AAD9D0011BB0B955001FF2BB /* Search-25.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD9D0001BB0B955001FF2BB /* Search-25.png */; settings = {ASSET_TAGS = (); }; };
 		AAD9D0041BB0BE01001FF2BB /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD9D0031BB0BE01001FF2BB /* SearchTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		AAD9D0071BB1D77F001FF2BB /* ForecastWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD9D0061BB1D77F001FF2BB /* ForecastWeather.swift */; settings = {ASSET_TAGS = (); }; };
+		AAD9D00A1BB1EC30001FF2BB /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD9D0091BB1EC30001FF2BB /* LocationManager.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,11 +99,12 @@
 		AA4C1CC01BAF62880032B50F /* WeatherSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherSearchViewController.m; sourceTree = "<group>"; };
 		AA4C1CC21BAF6B1A0032B50F /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = WeatherApp/Location.h; sourceTree = "<group>"; };
 		AA4C1CC31BAF6B1A0032B50F /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Location.m; path = WeatherApp/Location.m; sourceTree = "<group>"; };
-		AAD9D0001BB0B955001FF2BB /* Search-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Search-25.png"; sourceTree = "<group>"; };
 		AAD9D0021BB0BE01001FF2BB /* SearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewCell.h; sourceTree = "<group>"; };
 		AAD9D0031BB0BE01001FF2BB /* SearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewCell.m; sourceTree = "<group>"; };
 		AAD9D0051BB1D77E001FF2BB /* WeatherApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "WeatherApp-Bridging-Header.h"; path = "WeatherApp/WeatherApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		AAD9D0061BB1D77F001FF2BB /* ForecastWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForecastWeather.swift; path = WeatherApp/ForecastWeather.swift; sourceTree = "<group>"; };
+		AAD9D0081BB1EC30001FF2BB /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationManager.h; path = WeatherApp/LocationManager.h; sourceTree = "<group>"; };
+		AAD9D0091BB1EC30001FF2BB /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationManager.m; path = WeatherApp/LocationManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,7 +181,6 @@
 				AA4C1CB81BAF55600032B50F /* CustomTableViewCell.h */,
 				AA4C1CB91BAF55600032B50F /* CustomTableViewCell.m */,
 				AA4C1C591BAE20FE0032B50F /* Assets.xcassets */,
-				AAD9D0001BB0B955001FF2BB /* Search-25.png */,
 				AA4C1C5B1BAE20FE0032B50F /* LaunchScreen.storyboard */,
 				AA4C1C4A1BAE20FE0032B50F /* Supporting Files */,
 			);
@@ -240,6 +240,8 @@
 				AA4C1CC31BAF6B1A0032B50F /* Location.m */,
 				AA4C1CB31BAF513E0032B50F /* DataStack.h */,
 				AA4C1CB41BAF513E0032B50F /* DataStack.m */,
+				AAD9D0081BB1EC30001FF2BB /* LocationManager.h */,
+				AAD9D0091BB1EC30001FF2BB /* LocationManager.m */,
 				AAD9D0061BB1D77F001FF2BB /* ForecastWeather.swift */,
 				AAD9D0051BB1D77E001FF2BB /* WeatherApp-Bridging-Header.h */,
 			);
@@ -314,6 +316,11 @@
 				TargetAttributes = {
 					AA4C1C461BAE20FE0032B50F = {
 						CreatedOnToolsVersion = 7.0;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					AA4C1C621BAE20FE0032B50F = {
 						CreatedOnToolsVersion = 7.0;
@@ -352,7 +359,6 @@
 			files = (
 				AA4C1C5D1BAE20FE0032B50F /* LaunchScreen.storyboard in Resources */,
 				AA4C1C5A1BAE20FE0032B50F /* Assets.xcassets in Resources */,
-				AAD9D0011BB0B955001FF2BB /* Search-25.png in Resources */,
 				AA4C1C581BAE20FE0032B50F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,6 +395,7 @@
 				AA4C1CC11BAF62880032B50F /* WeatherSearchViewController.m in Sources */,
 				AA4C1C871BAE226F0032B50F /* MapPin.m in Sources */,
 				AAD9D0071BB1D77F001FF2BB /* ForecastWeather.swift in Sources */,
+				AAD9D00A1BB1EC30001FF2BB /* LocationManager.m in Sources */,
 				AA4C1CBA1BAF55600032B50F /* CustomTableViewCell.m in Sources */,
 				AA4C1CC41BAF6B1A0032B50F /* Location.m in Sources */,
 				AA4C1CB11BAED0E40032B50F /* WeatherLocation+CoreDataProperties.m in Sources */,
