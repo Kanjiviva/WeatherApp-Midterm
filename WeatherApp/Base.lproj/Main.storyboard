@@ -707,10 +707,10 @@
     <resources>
         <image name="Map Marker-26" width="26" height="26"/>
         <image name="Thermometer-26" width="26" height="26"/>
+        <image name="Worldwide Location-26" width="26" height="26"/>
         <image name="rain" width="60" height="60"/>
         <image name="temperatureIconBG" width="42" height="43"/>
         <image name="valueBox" width="55" height="47"/>
-        <image name="Worldwide Location-26" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="PTX-S6-xaM"/>
