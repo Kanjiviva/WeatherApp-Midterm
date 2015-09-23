@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4EB8C57F1BB204A400D46B05 /* WeatherDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB8C57E1BB204A400D46B05 /* WeatherDetailTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		4EC820291BB23F2100D0273C /* WeatherDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC820281BB23F2100D0273C /* WeatherDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
+		4EE009061BB25743005C7B16 /* WeeklyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE009051BB25743005C7B16 /* WeeklyDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		AA4C1C4C1BAE20FE0032B50F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1C4B1BAE20FE0032B50F /* main.m */; };
 		AA4C1C4F1BAE20FE0032B50F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1C4E1BAE20FE0032B50F /* AppDelegate.m */; };
-		AA4C1C521BAE20FE0032B50F /* WeatherDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1C511BAE20FE0032B50F /* WeatherDetailViewController.m */; };
 		AA4C1C551BAE20FE0032B50F /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1C541BAE20FE0032B50F /* MapViewController.m */; };
 		AA4C1C581BAE20FE0032B50F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA4C1C561BAE20FE0032B50F /* Main.storyboard */; };
 		AA4C1C5A1BAE20FE0032B50F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA4C1C591BAE20FE0032B50F /* Assets.xcassets */; };
@@ -52,12 +54,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4EB8C57D1BB204A400D46B05 /* WeatherDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherDetailTableViewCell.h; sourceTree = "<group>"; };
+		4EB8C57E1BB204A400D46B05 /* WeatherDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherDetailTableViewCell.m; sourceTree = "<group>"; };
+		4EC820271BB23F2100D0273C /* WeatherDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherDetailViewController.h; sourceTree = "<group>"; };
+		4EC820281BB23F2100D0273C /* WeatherDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherDetailViewController.m; sourceTree = "<group>"; };
+		4EE009041BB25743005C7B16 /* WeeklyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeeklyDetailViewController.h; sourceTree = "<group>"; };
+		4EE009051BB25743005C7B16 /* WeeklyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeeklyDetailViewController.m; sourceTree = "<group>"; };
 		AA4C1C471BAE20FE0032B50F /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA4C1C4B1BAE20FE0032B50F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AA4C1C4D1BAE20FE0032B50F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AA4C1C4E1BAE20FE0032B50F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		AA4C1C501BAE20FE0032B50F /* WeatherDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherDetailViewController.h; sourceTree = "<group>"; };
-		AA4C1C511BAE20FE0032B50F /* WeatherDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherDetailViewController.m; sourceTree = "<group>"; };
 		AA4C1C531BAE20FE0032B50F /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		AA4C1C541BAE20FE0032B50F /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		AA4C1C571BAE20FE0032B50F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -157,11 +163,15 @@
 				AA4C1CBE1BAF5BF50032B50F /* Constants.h */,
 				AA4C1C4D1BAE20FE0032B50F /* AppDelegate.h */,
 				AA4C1C4E1BAE20FE0032B50F /* AppDelegate.m */,
-				AA4C1C501BAE20FE0032B50F /* WeatherDetailViewController.h */,
-				AA4C1C511BAE20FE0032B50F /* WeatherDetailViewController.m */,
 				AA4C1C531BAE20FE0032B50F /* MapViewController.h */,
 				AA4C1C541BAE20FE0032B50F /* MapViewController.m */,
 				AA4C1C561BAE20FE0032B50F /* Main.storyboard */,
+				4EC820271BB23F2100D0273C /* WeatherDetailViewController.h */,
+				4EC820281BB23F2100D0273C /* WeatherDetailViewController.m */,
+				4EB8C57D1BB204A400D46B05 /* WeatherDetailTableViewCell.h */,
+				4EE009041BB25743005C7B16 /* WeeklyDetailViewController.h */,
+				4EE009051BB25743005C7B16 /* WeeklyDetailViewController.m */,
+				4EB8C57E1BB204A400D46B05 /* WeatherDetailTableViewCell.m */,
 				AA4C1CBF1BAF62880032B50F /* WeatherSearchViewController.h */,
 				AA4C1CC01BAF62880032B50F /* WeatherSearchViewController.m */,
 				AA4C1CBB1BAF56920032B50F /* WeatherListTableViewController.h */,
@@ -374,11 +384,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EE009061BB25743005C7B16 /* WeeklyDetailViewController.m in Sources */,
 				AA4C1CBD1BAF56920032B50F /* WeatherListTableViewController.m in Sources */,
 				AA4C1CB51BAF513E0032B50F /* DataStack.m in Sources */,
 				AA4C1C8A1BAE227C0032B50F /* Weather.m in Sources */,
 				AA4C1C551BAE20FE0032B50F /* MapViewController.m in Sources */,
+				4EB8C57F1BB204A400D46B05 /* WeatherDetailTableViewCell.m in Sources */,
 				AA4C1CB21BAED0E40032B50F /* WeatherLocation.m in Sources */,
+				4EC820291BB23F2100D0273C /* WeatherDetailViewController.m in Sources */,
 				AA4C1CC11BAF62880032B50F /* WeatherSearchViewController.m in Sources */,
 				AA4C1C871BAE226F0032B50F /* MapPin.m in Sources */,
 				AAD9D0071BB1D77F001FF2BB /* ForecastWeather.swift in Sources */,
@@ -388,7 +401,6 @@
 				AA4C1CB11BAED0E40032B50F /* WeatherLocation+CoreDataProperties.m in Sources */,
 				AA4C1CAC1BAED0720032B50F /* Model.xcdatamodeld in Sources */,
 				AA4C1C4F1BAE20FE0032B50F /* AppDelegate.m in Sources */,
-				AA4C1C521BAE20FE0032B50F /* WeatherDetailViewController.m in Sources */,
 				AA4C1C4C1BAE20FE0032B50F /* main.m in Sources */,
 				AAD9D0041BB0BE01001FF2BB /* SearchTableViewCell.m in Sources */,
 			);
