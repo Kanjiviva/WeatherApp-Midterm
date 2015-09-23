@@ -14,9 +14,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>WeatherWidget.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>AA2DD35C1BB350A900EA0868</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>AA4C1C461BAE20FE0032B50F</key>
 		<dict>
 			<key>primary</key>

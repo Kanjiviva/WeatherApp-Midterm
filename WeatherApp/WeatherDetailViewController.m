@@ -197,13 +197,13 @@
                 NSString *condition = [[weather objectAtIndex:0] objectForKey:@"main"];
                 NSString *weatherDescription = [[weather objectAtIndex:0] objectForKey:@"description"];
                 
-                if ([condition isEqualToString:@"Rain"] && [weather objectAtIndex:1] != nil) {
-                    condition = [[weather objectAtIndex:1] objectForKey:@"main"];
-                    weatherDescription = [[weather objectAtIndex:1] objectForKey:@"description"];
-                } else {
-                    condition = [[weather objectAtIndex:0] objectForKey:@"main"];
-                    weatherDescription = [[weather objectAtIndex:0] objectForKey:@"description"];
-                }
+//                if ([condition isEqualToString:@"Rain"] && [weather objectAtIndex:1] != nil) {
+//                    condition = [[weather objectAtIndex:1] objectForKey:@"main"];
+//                    weatherDescription = [[weather objectAtIndex:1] objectForKey:@"description"];
+//                } else {
+//                    condition = [[weather objectAtIndex:0] objectForKey:@"main"];
+//                    weatherDescription = [[weather objectAtIndex:0] objectForKey:@"description"];
+//                }
                 
                 NSNumber *time = [list objectForKey:@"dt"];
                 

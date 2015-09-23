@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="M4Y-Lb-cyx">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <scenes>
+        <!--Today View Controller-->
+        <scene sceneID="cwh-vc-ff4">
+            <objects>
+                <viewController id="M4Y-Lb-cyx" customClass="TodayViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ft6-oW-KC0"/>
+                        <viewControllerLayoutGuide type="bottom" id="FKl-LY-JtV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xaa-xH-ZmB">
+                                <rect key="frame" x="0.0" y="0.0" width="45" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="86T-zm-SBq"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vBO-R8-Fxp">
+                                <rect key="frame" x="53" y="8" width="267" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="vBO-R8-Fxp" secondAttribute="bottom" constant="8" id="JaD-4R-xg5"/>
+                            <constraint firstItem="vBO-R8-Fxp" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" id="KNH-jf-Lb5"/>
+                            <constraint firstAttribute="trailing" secondItem="vBO-R8-Fxp" secondAttribute="trailing" id="KPD-cH-KA7"/>
+                            <constraint firstItem="xaa-xH-ZmB" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" id="hGA-kd-URU"/>
+                            <constraint firstItem="xaa-xH-ZmB" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" id="jtC-s2-wXq"/>
+                            <constraint firstItem="vBO-R8-Fxp" firstAttribute="leading" secondItem="xaa-xH-ZmB" secondAttribute="trailing" constant="8" id="nDY-Zs-TDk"/>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="xaa-xH-ZmB" secondAttribute="bottom" id="sDF-Bd-Kif"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="37"/>
+                    <connections>
+                        <outlet property="iconImageView" destination="xaa-xH-ZmB" id="qIw-qn-GEh"/>
+                        <outlet property="locationLabel" destination="vBO-R8-Fxp" id="t6y-gX-oIJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="516" y="284.5"/>
+        </scene>
+    </scenes>
+</document>
