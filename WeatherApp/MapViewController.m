@@ -64,7 +64,7 @@
     [self favoriteLocationsPin];
     
     
-    [self newEntry:self.location];
+    //    [self newEntry:self.location];
     
 }
 
@@ -151,17 +151,12 @@
 - (void)reloadLocation {
     
     NSFetchRequest *fetch = [NSFetchRequest fetchRequestWithEntityName:@"WeatherLocation"];
-    
-    //    fetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"todoTitle" ascending:YES]];
-    
     NSError *fetchError = nil;
     NSArray *allWeathers = [self.dataStack.context executeFetchRequest:fetch error:&fetchError];
     
     NSLog(@"all weathers lists are: %@", allWeathers);
     
     self.allLists = [allWeathers mutableCopy];
-    
-    //    [self.tableView reloadData];
 }
 
 
@@ -183,9 +178,12 @@
     
 }
 
+- (IBAction)findCurrentLocation:(UIBarButtonItem *)sender {
+    [self updateLocation:[LocationManager sharedLocationManager].currentLocation];
+}
+
 #pragma mark - Annotation Delegate -
 
-// this can be optional, will talk to Derrick about it
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray<MKAnnotationView *> *)views {
     MKAnnotationView *annotationView = [views objectAtIndex:0];
     id<MKAnnotation> mp = [annotationView annotation];
@@ -198,14 +196,16 @@
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     
-    WeatherLocation *weatherLocation = [NSEntityDescription insertNewObjectForEntityForName:@"WeatherLocation" inManagedObjectContext:self.dataStack.context];
-    
-    for (MapPin *pin in self.allPins) {
-        
+    if ([view.annotation isKindOfClass:[MapPin class]]){
+        WeatherLocation *weatherLocation = [NSEntityDescription insertNewObjectForEntityForName:@"WeatherLocation" inManagedObjectContext:self.dataStack.context];
+        MapPin *pin = (MapPin*)view.annotation;
         
         weatherLocation.latitude = pin.coordinate.latitude;
         weatherLocation.longitude = pin.coordinate.longitude;
+        
+        
         weatherLocation.locationName = pin.cityName;
+        
         weatherLocation.currentTemperature = [pin.currentTemp floatValue];
         weatherLocation.condition = pin.condition;
         weatherLocation.country = pin.country;
@@ -216,21 +216,29 @@
             NSLog(@"Save failed! %@", saveError);
         }
         
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Location Saved!"
+                                                                       message:@"You have saved a location"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
         
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
         
+        [alert addAction:action];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        self.tabBarController.selectedIndex = 1;
+
+    } else {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Oops! Unable to save!"
+                                                                       message:@"You already have a existing lcoation!"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+        
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
     }
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Location Saved!"
-                                                                   message:@"You have saved a location"
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
-    
-    [alert addAction:action];
-    
-    [self presentViewController:alert animated:YES completion:nil];
-    self.tabBarController.selectedIndex = 1;
-}
+    }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
@@ -309,6 +317,12 @@
             
             NSString *condition = [[weathers objectAtIndex:0] objectForKey:@"main"];
             
+            if ([condition isEqualToString:@"Rain"] && [weathers objectAtIndex:1] != nil) {
+                condition = [[weathers objectAtIndex:1] objectForKey:@"main"];
+            } else {
+                condition = [[weathers objectAtIndex:0] objectForKey:@"main"];
+            }
+            
             NSDictionary *sys = [weatherDict objectForKey:@"sys"];
             
             NSString *country = [sys objectForKey:@"country"];
@@ -333,7 +347,9 @@
                     [self.mapView addAnnotation:pin];
                 } else {
                     [self.mapView removeAnnotations:self.allPins];
+                    //                    [self.allPins removeAllObjects];
                     [self.mapView addAnnotation:pin];
+                    
                 }
                 
                 
@@ -343,9 +359,8 @@
     
     [dataTask resume];
 }
-- (IBAction)findCurrentLocation:(UIBarButtonItem *)sender {
-    [self updateLocation:[LocationManager sharedLocationManager].currentLocation];
-}
+
+#pragma mark - prepare for segue -
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showSearch"]) {
@@ -353,9 +368,5 @@
         weatherSearchVC.delegate = self;
     }
 }
-
-// search view did add entry
-
-// zoom in on new entry
 
 @end
