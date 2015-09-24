@@ -15,6 +15,7 @@
 @interface TodayViewController () <NCWidgetProviding>
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *conditionLabel;
 
 @property(nonatomic, copy) void (^completionHandler)(NCUpdateResult);
 @property(nonatomic) BOOL hasSignaled;
@@ -113,27 +114,25 @@
             
             NSString *condition = [[weathers objectAtIndex:0] objectForKey:@"main"];
             
-//            if ([condition isEqualToString:@"Rain"] && [weathers objectAtIndex:1] != nil) {
-//                condition = [[weathers objectAtIndex:1] objectForKey:@"main"];
-//            } else {
-//                condition = [[weathers objectAtIndex:0] objectForKey:@"main"];
-//            }
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [activityView stopAnimating];
-                self.locationLabel.text = [NSString stringWithFormat:@"%@  %@", name, currentTempString];
+                self.locationLabel.text = [NSString stringWithFormat:@"%@  %@ºC", name, currentTempString];
+                self.conditionLabel.text = condition;
                 
-//                if ([condition isEqualToString:@"Rain"]) {
-//                    self.iconImageView.image = [UIImage imageNamed:@"Rain-26.png"];
-//                } else if ([condition isEqualToString:@"Clouds"]) {
-//                    self.iconImageView.image = [UIImage imageNamed:@"Clouds-26.png"];
-//                } else if ([condition isEqualToString:@"Clear"]) {
-//                    self.iconImageView.image = [UIImage imageNamed:@"Sun-24.png"];
-//                } else if ([condition isEqualToString:@"Snow"]) {
-//                    self.iconImageView.image = [UIImage imageNamed:@"Snow-24.png"];
-//                } else if ([condition isEqualToString:@"Mist"]) {
-//                    self.iconImageView.image = [UIImage imageNamed:@"Fog Day-24.png"];
-//                }
+                if ([condition isEqualToString:@"Rain"]) {
+                    self.iconImageView.image = [UIImage imageNamed:@"rain.png"];
+                } else if ([condition isEqualToString:@"Clouds"]) {
+                    self.iconImageView.image = [UIImage imageNamed:@"cloudy.png"];
+                } else if ([condition isEqualToString:@"Clear"]) {
+                    self.iconImageView.image = [UIImage imageNamed:@"clear-day.png"];
+                } else if ([condition isEqualToString:@"Snow"]) {
+                    self.iconImageView.image = [UIImage imageNamed:@"snow.png"];
+                } else if ([condition isEqualToString:@"Mist"]) {
+                    self.iconImageView.image = [UIImage imageNamed:@"fog.png"];
+                } else {
+                    self.iconImageView.image = [UIImage imageNamed:@"defaut.png"];
+                }
             });
         }
     }];
