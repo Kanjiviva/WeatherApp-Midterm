@@ -15,6 +15,7 @@
 		AA2DD3671BB350A900EA0868 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA2DD3651BB350A900EA0868 /* MainInterface.storyboard */; };
 		AA2DD36B1BB350A900EA0868 /* WeatherWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AA2DD35D1BB350A900EA0868 /* WeatherWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AA2DD3701BB359D900EA0868 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD9D0091BB1EC30001FF2BB /* LocationManager.m */; settings = {ASSET_TAGS = (); }; };
+		AA2DD3771BB45B2A00EA0868 /* Flag Filled -24.png in Resources */ = {isa = PBXBuildFile; fileRef = AA2DD3761BB45B2A00EA0868 /* Flag Filled -24.png */; settings = {ASSET_TAGS = (); }; };
 		AA4C1C4C1BAE20FE0032B50F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1C4B1BAE20FE0032B50F /* main.m */; };
 		AA4C1C4F1BAE20FE0032B50F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1C4E1BAE20FE0032B50F /* AppDelegate.m */; };
 		AA4C1C551BAE20FE0032B50F /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1C541BAE20FE0032B50F /* MapViewController.m */; };
@@ -92,6 +93,7 @@
 		AA2DD3631BB350A900EA0868 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
 		AA2DD3661BB350A900EA0868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		AA2DD3681BB350A900EA0868 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA2DD3761BB45B2A00EA0868 /* Flag Filled -24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Flag Filled -24.png"; sourceTree = "<group>"; };
 		AA4C1C471BAE20FE0032B50F /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA4C1C4B1BAE20FE0032B50F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AA4C1C4D1BAE20FE0032B50F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				AA4C1CB81BAF55600032B50F /* CustomTableViewCell.h */,
 				AA4C1CB91BAF55600032B50F /* CustomTableViewCell.m */,
 				AA4C1C591BAE20FE0032B50F /* Assets.xcassets */,
+				AA2DD3761BB45B2A00EA0868 /* Flag Filled -24.png */,
 				AA4C1C5B1BAE20FE0032B50F /* LaunchScreen.storyboard */,
 				AA4C1C4A1BAE20FE0032B50F /* Supporting Files */,
 			);
@@ -453,6 +456,7 @@
 				AA4C1C5D1BAE20FE0032B50F /* LaunchScreen.storyboard in Resources */,
 				AA4C1C5A1BAE20FE0032B50F /* Assets.xcassets in Resources */,
 				AA4C1C581BAE20FE0032B50F /* Main.storyboard in Resources */,
+				AA2DD3771BB45B2A00EA0868 /* Flag Filled -24.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,6 +763,7 @@
 				AA2DD36D1BB350A900EA0868 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AA4C1C421BAE20FE0032B50F /* Build configuration list for PBXProject "WeatherApp" */ = {
 			isa = XCConfigurationList;

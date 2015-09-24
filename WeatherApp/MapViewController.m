@@ -246,7 +246,14 @@
         MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MapPin"];
         annotationView.enabled = YES;
         annotationView.canShowCallout = YES;
-        annotationView.image = [UIImage imageNamed:@"Map Pin-26.png"];
+        
+        if ([annotation isKindOfClass:[WeatherLocation class]]) {
+            annotationView.image = [UIImage imageNamed:@"Flag Filled -24.png"];
+        } else {
+            annotationView.image = [UIImage imageNamed:@"Map Pin-26.png"];
+        }
+        
+        
         annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         
         // View for left accessory
@@ -255,8 +262,6 @@
         
         UIImageView *temp=[[UIImageView alloc] initWithFrame:CGRectMake(5, 5, annotationView.frame.size.height-5, annotationView.frame.size.height-5)];
         
-        
-        //if ([annotation isKindOfClass:[WeatherLocation class]] ) {
         MapPin *weatherLocation = annotation;
         
         if ([weatherLocation.condition isEqualToString:@"Rain"]) {

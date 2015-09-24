@@ -37,6 +37,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [[LocationManager sharedLocationManager] startLocationManager:self];
     [self jsonRequest];
 }
@@ -77,6 +78,15 @@
     
     NSString *stringURL = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f&APPID=%@", [LocationManager sharedLocationManager].currentLocation.coordinate.latitude, [LocationManager sharedLocationManager].currentLocation.coordinate.longitude, API_KEY];
     
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc]
+                                             initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    
+    activityView.center=self.view.center;
+    [activityView startAnimating];
+    [self.view addSubview:activityView];
+    
+    activityView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+    
     NSURLSession *session = [NSURLSession sharedSession];
     
     NSURLSessionTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:stringURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -110,6 +120,7 @@
 //            }
             
             dispatch_async(dispatch_get_main_queue(), ^{
+                [activityView stopAnimating];
                 self.locationLabel.text = [NSString stringWithFormat:@"%@%@", name, currentTempString];
                 
 //                if ([condition isEqualToString:@"Rain"]) {

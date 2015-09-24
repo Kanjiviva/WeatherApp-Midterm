@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSURLSessionTask *dataTask;
 
+@property (strong, nonatomic) UIActivityIndicatorView *activityView;
+
 @end
 
 @implementation WeatherSearchViewController
@@ -37,7 +39,13 @@
     [self.searchTextField addTarget:self
                              action:@selector(searchingTextField)
                    forControlEvents:UIControlEventEditingChanged];
+    self.activityView = [[UIActivityIndicatorView alloc]
+                         initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.activityView.center=self.view.center;
     
+    self.activityView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+    
+    [self.view addSubview:self.activityView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,16 +56,26 @@
 #pragma mark - Helper Method -
 
 - (void)searchingTextField {
-    [self searchCity];
+    if ([self.searchTextField.text isEqualToString:@""]) {
+        self.activityView.hidden = YES;
+    } else {
+        self.activityView.hidden = NO;
+        [self searchCity];
+        
+    }
 }
-
 - (void)searchCity {
+    //    self.activityView.hidden = NO;
+    [self.activityView startAnimating];
     
     NSString *stringURL = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/find?q=%@&type=like&APPID=%@", self.searchTextField.text, API_KEY];
     
     self.searchItem = [stringURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
+    
     [self jsonRequest:self.searchItem];
+    
+    
 }
 
 - (float)convertToCelsius:(float)kelvin {
@@ -93,16 +111,21 @@
 
 #pragma mark - JSON request -
 
-- (void)jsonRequest:(NSString *)searchString {
+- (void)jsonRequest:(NSString *)searchString{
     
     NSURLSession *session = [NSURLSession sharedSession];
     
     [self.dataTask suspend];
     [self.dataTask cancel];
     
+    
+    
     self.dataTask = [session dataTaskWithURL:[NSURL URLWithString:searchString] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
+        //
+        
         if (!error) {
+            //            [self.activityView stopAnimating];
             
             NSMutableArray *newWeathers = [NSMutableArray array];
             NSError *jsonError = nil;
@@ -133,16 +156,16 @@
                 Location *location = [[Location alloc] initWithCity:name temperature:[NSNumber numberWithFloat:temp] country:country longitude:lon latitude:lat condition:condition];
                 
                 [newWeathers addObject:location];
+                
             }
-            
-            
-            
+            //            [activityView stopAnimating];
+            //            activityView.hidden = YES;
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 self.weathers = newWeathers;
                 
-                
                 [self.tableView reloadData];
+                
             });
         }
         
@@ -167,7 +190,7 @@
     SearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     Location *location = self.weathers[indexPath.row];
-    
+    self.activityView.hidden = YES;
     cell.cityLabel.text = location.cityName;
     cell.countryLabel.text = location.country;
     
