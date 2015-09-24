@@ -26,6 +26,8 @@
 @property (strong, nonatomic) Location *location;
 //@property (strong, nonatomic) WeatherLocation *weatherLocation;
 
+@property (nonatomic) int currentIndex;
+
 @end
 
 @implementation MapViewController
@@ -34,6 +36,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.currentIndex = 0;
+    
     self.mapView.delegate = self;
     
     self.mapView.showsUserLocation = YES;
@@ -110,6 +115,14 @@
     
 }
 
+- (void)allWeatherLocations:(WeatherLocation *)weatherLocation {
+    
+    Location *location = [[Location alloc] initWithCity:weatherLocation.locationName temperature:[NSNumber numberWithFloat:weatherLocation.currentTemperature] country:weatherLocation.country longitude:[NSNumber numberWithFloat:weatherLocation.longitude] latitude:[NSNumber numberWithFloat:weatherLocation.latitude] condition:weatherLocation.condition];
+    
+    [self newEntry:location];
+    
+}
+
 - (float)convertToCelsius:(float)kelvin {
     
     float celsius;
@@ -177,9 +190,30 @@
     
 }
 
+- (IBAction)movingRight:(UIButton *)sender {
+    self.currentIndex++;
+    if (self.currentIndex < [self.allLists count]) {
+        [self allWeatherLocations:self.allLists[self.currentIndex]];
+    } else {
+        self.currentIndex = 0;
+        [self allWeatherLocations:self.allLists[self.currentIndex]];
+    }
+}
+
+- (IBAction)movingLeft:(UIButton *)sender {
+    self.currentIndex--;
+    if (self.currentIndex >=0) {
+        [self allWeatherLocations:self.allLists[self.currentIndex]];
+    } else {
+        self.currentIndex = (int)[self.allLists count] - 1;
+        [self allWeatherLocations:self.allLists[self.currentIndex]];
+    }
+}
+
 - (IBAction)findCurrentLocation:(UIBarButtonItem *)sender {
     [self updateLocation:[LocationManager sharedLocationManager].currentLocation];
 }
+
 
 #pragma mark - Annotation Delegate -
 
