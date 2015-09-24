@@ -17,7 +17,7 @@
 }
 
 -(NSString *)title {
-    return [NSString stringWithFormat:@"City: %@. Weather: %@", self.locationName, self.condition];
+    return [NSString stringWithFormat:@"City: %@", self.locationName];
 }
 
 

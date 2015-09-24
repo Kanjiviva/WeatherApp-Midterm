@@ -33,7 +33,7 @@
     
     self.dataStack = [DataStack new];
     //self.tableView.backgroundView = nil;
-    self.tableView.backgroundColor = [UIColor grayColor];
+    self.tableView.backgroundColor = [UIColor colorWithRed:175.0/255.0 green:175.0/255.0  blue:175.0/255.0  alpha:1.0];
 }
 
 - (void)didReceiveMemoryWarning {
