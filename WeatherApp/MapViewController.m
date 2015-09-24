@@ -316,11 +316,11 @@
             
             NSString *condition = [[weathers objectAtIndex:0] objectForKey:@"main"];
             
-            if ([condition isEqualToString:@"Rain"] && [weathers objectAtIndex:1] != nil) {
-                condition = [[weathers objectAtIndex:1] objectForKey:@"main"];
-            } else {
-                condition = [[weathers objectAtIndex:0] objectForKey:@"main"];
-            }
+//            if ([condition isEqualToString:@"Rain"] && [weathers objectAtIndex:1] != nil) {
+//                condition = [[weathers objectAtIndex:1] objectForKey:@"main"];
+//            } else {
+//                condition = [[weathers objectAtIndex:0] objectForKey:@"main"];
+//            }
             
             NSDictionary *sys = [weatherDict objectForKey:@"sys"];
             
