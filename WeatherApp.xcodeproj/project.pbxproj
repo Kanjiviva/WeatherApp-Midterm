@@ -27,6 +27,10 @@
 		AA2DD37D1BB493C300EA0868 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2DD37C1BB493C300EA0868 /* AudioToolbox.framework */; };
 		AA2DD37F1BB494C200EA0868 /* rain.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA2DD37E1BB494C100EA0868 /* rain.mp3 */; settings = {ASSET_TAGS = (); }; };
 		AA2DD3811BB496BC00EA0868 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2DD3801BB496BC00EA0868 /* AVFoundation.framework */; };
+		AA2DD3831BB4A26100EA0868 /* clear.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA2DD3821BB4A26100EA0868 /* clear.mp3 */; settings = {ASSET_TAGS = (); }; };
+		AA2DD3851BB4A54C00EA0868 /* Storm-25.png in Resources */ = {isa = PBXBuildFile; fileRef = AA2DD3841BB4A54C00EA0868 /* Storm-25.png */; settings = {ASSET_TAGS = (); }; };
+		AA2DD3871BB4A5DF00EA0868 /* thunderstorm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA2DD3861BB4A5DF00EA0868 /* thunderstorm.mp3 */; settings = {ASSET_TAGS = (); }; };
+		AA2DD3891BB4A67800EA0868 /* clouds.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA2DD3881BB4A67800EA0868 /* clouds.mp3 */; settings = {ASSET_TAGS = (); }; };
 		AA4C1C4C1BAE20FE0032B50F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1C4B1BAE20FE0032B50F /* main.m */; };
 		AA4C1C4F1BAE20FE0032B50F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1C4E1BAE20FE0032B50F /* AppDelegate.m */; };
 		AA4C1C551BAE20FE0032B50F /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1C541BAE20FE0032B50F /* MapViewController.m */; };
@@ -114,8 +118,12 @@
 		AA2DD3781BB47FB800EA0868 /* Right-24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Right-24.png"; sourceTree = "<group>"; };
 		AA2DD3791BB47FB800EA0868 /* Left-24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Left-24.png"; sourceTree = "<group>"; };
 		AA2DD37C1BB493C300EA0868 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		AA2DD37E1BB494C100EA0868 /* rain.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = rain.mp3; sourceTree = "<group>"; };
+		AA2DD37E1BB494C100EA0868 /* rain.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = rain.mp3; path = WeatherApp/rain.mp3; sourceTree = "<group>"; };
 		AA2DD3801BB496BC00EA0868 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		AA2DD3821BB4A26100EA0868 /* clear.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = clear.mp3; path = WeatherApp/clear.mp3; sourceTree = "<group>"; };
+		AA2DD3841BB4A54C00EA0868 /* Storm-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Storm-25.png"; sourceTree = "<group>"; };
+		AA2DD3861BB4A5DF00EA0868 /* thunderstorm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = thunderstorm.mp3; path = WeatherApp/thunderstorm.mp3; sourceTree = "<group>"; };
+		AA2DD3881BB4A67800EA0868 /* clouds.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = clouds.mp3; path = WeatherApp/clouds.mp3; sourceTree = "<group>"; };
 		AA4C1C471BAE20FE0032B50F /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA4C1C4B1BAE20FE0032B50F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AA4C1C4D1BAE20FE0032B50F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -228,11 +236,23 @@
 			path = WeatherWidget;
 			sourceTree = "<group>";
 		};
+		AA2DD38A1BB4A67C00EA0868 /* Audiosound */ = {
+			isa = PBXGroup;
+			children = (
+				AA2DD3861BB4A5DF00EA0868 /* thunderstorm.mp3 */,
+				AA2DD3821BB4A26100EA0868 /* clear.mp3 */,
+				AA2DD37E1BB494C100EA0868 /* rain.mp3 */,
+				AA2DD3881BB4A67800EA0868 /* clouds.mp3 */,
+			);
+			name = Audiosound;
+			sourceTree = "<group>";
+		};
 		AA4C1C3E1BAE20FE0032B50F = {
 			isa = PBXGroup;
 			children = (
 				AA4C1C9D1BAEC9950032B50F /* Model */,
 				AA4C1C491BAE20FE0032B50F /* WeatherApp */,
+				AA2DD38A1BB4A67C00EA0868 /* Audiosound */,
 				AA4C1C661BAE20FE0032B50F /* WeatherAppTests */,
 				AA4C1C711BAE20FE0032B50F /* WeatherAppUITests */,
 				AA2DD3611BB350A900EA0868 /* WeatherWidget */,
@@ -277,10 +297,10 @@
 				AA4C1CB81BAF55600032B50F /* CustomTableViewCell.h */,
 				AA4C1CB91BAF55600032B50F /* CustomTableViewCell.m */,
 				AA4C1C591BAE20FE0032B50F /* Assets.xcassets */,
-				AA2DD37E1BB494C100EA0868 /* rain.mp3 */,
 				AA2DD3781BB47FB800EA0868 /* Right-24.png */,
 				AA2DD3791BB47FB800EA0868 /* Left-24.png */,
 				AA2DD3761BB45B2A00EA0868 /* Flag Filled -24.png */,
+				AA2DD3841BB4A54C00EA0868 /* Storm-25.png */,
 				AA4C1C5B1BAE20FE0032B50F /* LaunchScreen.storyboard */,
 				AA4C1C4A1BAE20FE0032B50F /* Supporting Files */,
 			);
@@ -495,11 +515,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA4C1C5D1BAE20FE0032B50F /* LaunchScreen.storyboard in Resources */,
+				AA2DD3851BB4A54C00EA0868 /* Storm-25.png in Resources */,
 				AA4C1C5A1BAE20FE0032B50F /* Assets.xcassets in Resources */,
 				AA2DD37B1BB47FB800EA0868 /* Left-24.png in Resources */,
 				AA4C1C581BAE20FE0032B50F /* Main.storyboard in Resources */,
+				AA2DD3891BB4A67800EA0868 /* clouds.mp3 in Resources */,
 				AA2DD37A1BB47FB800EA0868 /* Right-24.png in Resources */,
 				AA2DD37F1BB494C200EA0868 /* rain.mp3 in Resources */,
+				AA2DD3871BB4A5DF00EA0868 /* thunderstorm.mp3 in Resources */,
+				AA2DD3831BB4A26100EA0868 /* clear.mp3 in Resources */,
 				AA2DD3771BB45B2A00EA0868 /* Flag Filled -24.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -27,6 +27,8 @@
 @property (strong, nonatomic) NSMutableArray *allPins;
 
 @property (strong, nonatomic) Location *location;
+
+@property (nonatomic) BOOL shouldPlay;
 //@property (strong, nonatomic) WeatherLocation *weatherLocation;
 
 @property (nonatomic) int currentIndex;
@@ -39,7 +41,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.shouldPlay = YES;
     self.currentIndex = 0;
     
     self.mapView.delegate = self;
@@ -57,13 +59,6 @@
     
     [[LocationManager sharedLocationManager] startLocationManager:self];
     
-    NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"rain" ofType:@"mp3"]];
-    
-    NSError *error = nil;
-    
-    self.mySoundPlayer =[[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:&error];
-    self.mySoundPlayer .volume=0.8f; //between 0 and 1
-    [self.mySoundPlayer prepareToPlay];
     [self favoriteLocationsPin];
     
     
@@ -75,11 +70,23 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self favoriteLocationsPin];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.mySoundPlayer stop];
+}
+
+- (void)differentSound:(NSURL *)soundURL {
     
-    
-    //    [self newEntry:self.location];
-    
+    NSError *error = nil;
+    self.mySoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:&error];
+    self.mySoundPlayer .volume=0.8f; //between 0 and 1
+    [self.mySoundPlayer prepareToPlay];
+    [self.mySoundPlayer play];
+    self.shouldPlay = NO;
 }
 
 #pragma mark - Location Manager -
@@ -108,6 +115,20 @@
 - (void)newEntry:(Location *)location {
     
     self.location = location;
+    
+    if ([self.location.condition isEqualToString:@"Rain"]) {
+        NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"rain" ofType:@"mp3"]];
+        [self differentSound:soundURL];
+    } else if ([self.location.condition isEqualToString:@"Clear"]) {
+        NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"clear" ofType:@"mp3"]];
+        [self differentSound:soundURL];
+    } else if ([self.location.condition isEqualToString:@"Thunderstorm"]) {
+        NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"thunderstorm" ofType:@"mp3"]];
+        [self differentSound:soundURL];
+    } else if ([self.location.condition isEqualToString:@"Clouds"]) {
+        NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"clouds" ofType:@"mp3"]];
+        [self differentSound:soundURL];
+    }
     
     MKCoordinateRegion region;
     
@@ -269,7 +290,7 @@
         
         [self presentViewController:alert animated:YES completion:nil];
         self.tabBarController.selectedIndex = 1;
-
+        
     } else {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Oops! Unable to save!"
                                                                        message:@"You already have a existing lcoation!"
@@ -281,7 +302,7 @@
         [self presentViewController:alert animated:YES completion:nil];
     }
     
-    }
+}
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
@@ -310,23 +331,37 @@
         
         if ([weatherLocation.condition isEqualToString:@"Rain"]) {
             temp.image = [UIImage imageNamed:@"Rain-26.png"];
-//            AudioServicesPlaySystemSound(_soundID);
+            
             if ([annotation isKindOfClass:[MapPin class]]) {
-                [self.mySoundPlayer play];
+                NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"rain" ofType:@"mp3"]];
+                [self differentSound:soundURL];
             }
             
         } else if ([weatherLocation.condition isEqualToString:@"Clouds"]) {
             temp.image = [UIImage imageNamed:@"Clouds-26.png"];
-//            AudioServicesPlaySystemSound(_soundID);
+            if ([annotation isKindOfClass:[MapPin class]]) {
+                NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"clouds" ofType:@"mp3"]];
+                [self differentSound:soundURL];
+            }
+            
         } else if ([weatherLocation.condition isEqualToString:@"Clear"]) {
             temp.image = [UIImage imageNamed:@"Sun-24.png"];
-//            AudioServicesPlaySystemSound(_soundID);
+            if ([annotation isKindOfClass:[MapPin class]]) {
+                NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"clear" ofType:@"mp3"]];
+                [self differentSound:soundURL];
+            }
         } else if ([weatherLocation.condition isEqualToString:@"Snow"]) {
             temp.image = [UIImage imageNamed:@"Snow-24.png"];
-//            AudioServicesPlaySystemSound(_soundID);
+            
         } else if ([weatherLocation.condition isEqualToString:@"Mist"]) {
             temp.image = [UIImage imageNamed:@"Fog Day-24.png"];
-//            AudioServicesPlaySystemSound(_soundID);
+            
+        } else if ([weatherLocation.condition isEqualToString:@"Thunderstorm"]) {
+            temp.image = [UIImage imageNamed:@"Storm-25.png"];
+            if ([annotation isKindOfClass:[MapPin class]]) {
+                NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"thunderstorm" ofType:@"mp3"]];
+                [self differentSound:soundURL];
+            }
         }
         
         temp.contentMode = UIViewContentModeScaleAspectFit;
@@ -374,11 +409,11 @@
             
             NSString *condition = [[weathers objectAtIndex:0] objectForKey:@"main"];
             
-//            if ([condition isEqualToString:@"Rain"] && [weathers objectAtIndex:1] != nil) {
-//                condition = [[weathers objectAtIndex:1] objectForKey:@"main"];
-//            } else {
-//                condition = [[weathers objectAtIndex:0] objectForKey:@"main"];
-//            }
+            //            if ([condition isEqualToString:@"Rain"] && [weathers objectAtIndex:1] != nil) {
+            //                condition = [[weathers objectAtIndex:1] objectForKey:@"main"];
+            //            } else {
+            //                condition = [[weathers objectAtIndex:0] objectForKey:@"main"];
+            //            }
             
             NSDictionary *sys = [weatherDict objectForKey:@"sys"];
             
