@@ -28,7 +28,7 @@
     // Do any additional setup after loading the view from its nib.
 //    self.locationLabel.text = @"testing";
     [[LocationManager sharedLocationManager] startLocationManager:self];
-    [self jsonRequest];
+//    [self jsonRequest];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -103,11 +103,11 @@
             
             NSString *condition = [[weathers objectAtIndex:0] objectForKey:@"main"];
             
-            if ([condition isEqualToString:@"Rain"] && [weathers objectAtIndex:1] != nil) {
-                condition = [[weathers objectAtIndex:1] objectForKey:@"main"];
-            } else {
-                condition = [[weathers objectAtIndex:0] objectForKey:@"main"];
-            }
+//            if ([condition isEqualToString:@"Rain"] && [weathers objectAtIndex:1] != nil) {
+//                condition = [[weathers objectAtIndex:1] objectForKey:@"main"];
+//            } else {
+//                condition = [[weathers objectAtIndex:0] objectForKey:@"main"];
+//            }
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.locationLabel.text = [NSString stringWithFormat:@"%@%@", name, currentTempString];
