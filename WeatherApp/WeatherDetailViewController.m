@@ -55,12 +55,19 @@
     //Add gradient to view
     
     [self.mainView.layer insertSublayer:theViewGradient atIndex:0];
-    
     self.cityLabel.text = self.weatherLocation.locationName;
     self.currentTempLabel.text = [NSString stringWithFormat:@"%.1fºC",self.weatherLocation.currentTemperature];
     self.currentDescriptionLabel.text = self.weatherLocation.condition;
     self.currentImage.image = [self getImage:self.weatherLocation.condition];
-    
+    [UIView animateWithDuration:1.0f
+                     animations:^{
+                         CGRect frame = self.currentImage.frame;
+                         frame.size.width += 100.0f;
+                         frame.size.height += 100.0f;
+                         self.currentImage.frame = frame;
+                     }
+                     completion:^(BOOL finished){
+                     }];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

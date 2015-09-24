@@ -53,6 +53,17 @@
     self.highestTemp.text = [NSString stringWithFormat:@"%.1fºC", self.forcastWeather.highestTemp];
     self.humidity.text = [NSString stringWithFormat:@"%.1f%%", self.forcastWeather.humidity];
     self.condition.text = self.forcastWeather.condition;
+    [UIView animateWithDuration:1.0f
+                     animations:^{
+                         CGRect frame = self.weatherImage.frame;
+                         NSLog(@"%f, %f", self.weatherImage.frame.size.height,self.weatherImage.frame.size.width);
+                         frame.size.width += 90.0f;
+                         frame.size.height += 90.0f;
+                         self.weatherImage.frame = frame;
+                         NSLog(@"%f, %f", self.weatherImage.frame.size.height,self.weatherImage.frame.size.width);
+                     }
+                     completion:^(BOOL finished){
+                     }];
 
 }
 
