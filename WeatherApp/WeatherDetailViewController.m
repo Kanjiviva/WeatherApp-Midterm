@@ -45,16 +45,17 @@
 - (void) configureView {
     
     self.tableView.backgroundColor = [UIColor clearColor];
-    // Create the colors
-    UIColor *topColor = [UIColor colorWithRed:50.0/255.0 green:50.0/255.0 blue:50.0/255.0 alpha:1.0];
-    UIColor *bottomColor = [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0];
-    // Create the gradient
-    CAGradientLayer *theViewGradient = [CAGradientLayer layer];
-    theViewGradient.colors = [NSArray arrayWithObjects: (id)topColor.CGColor, (id)bottomColor.CGColor, nil];
-    theViewGradient.frame = self.mainView.bounds;
-    //Add gradient to view
+//    // Create the colors
+//    UIColor *topColor = [UIColor colorWithRed:50.0/255.0 green:50.0/255.0 blue:50.0/255.0 alpha:1.0];
+//    UIColor *bottomColor = [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0];
+//    // Create the gradient
+//    CAGradientLayer *theViewGradient = [CAGradientLayer layer];
+//    theViewGradient.colors = [NSArray arrayWithObjects: (id)topColor.CGColor, (id)bottomColor.CGColor, nil];
+//    theViewGradient.frame = self.mainView.bounds;
+//    //Add gradient to view
     
-    [self.mainView.layer insertSublayer:theViewGradient atIndex:0];
+    [self.mainView.layer insertSublayer:[self changeGradientBackgroundColor:self.weatherLocation.condition] atIndex:0];
+    
     self.cityLabel.text = self.weatherLocation.locationName;
     self.currentTempLabel.text = [NSString stringWithFormat:@"%.1fºC",self.weatherLocation.currentTemperature];
     self.currentDescriptionLabel.text = self.weatherLocation.condition;
@@ -215,7 +216,39 @@
     [dataTask resume];
     
 }
+- (CAGradientLayer *) changeGradientBackgroundColor:(NSString *)condition {
+    if ([condition isEqualToString:@"Clear"]) {
+        // Create the colors
+        UIColor *topColor = [UIColor colorWithRed:255.0/255.0 green:150.0/255.0 blue:33.0/255.0 alpha:1.0];
+        UIColor *bottomColor = [UIColor colorWithRed:255.0/255.0 green:190.0/255.0 blue:90.0/255.0 alpha:1.0];
+        // Create the gradient
+        CAGradientLayer *theViewGradient = [CAGradientLayer layer];
+        theViewGradient.colors = [NSArray arrayWithObjects: (id)topColor.CGColor, (id)bottomColor.CGColor, nil];
+        theViewGradient.frame = self.mainView.bounds;
+        return theViewGradient;
 
+    } else if ([condition isEqualToString:@"Rain"]) {
+        // Create the colors
+        UIColor *topColor = [UIColor colorWithRed:26.0/255.0 green:130.0/255.0 blue:255.0/255.0 alpha:1.0];
+        UIColor *bottomColor = [UIColor colorWithRed:130.0/255.0 green:206.0/255.0 blue:242.0/255.0 alpha:1.0];
+        // Create the gradient
+        CAGradientLayer *theViewGradient = [CAGradientLayer layer];
+        theViewGradient.colors = [NSArray arrayWithObjects: (id)topColor.CGColor, (id)bottomColor.CGColor, nil];
+        theViewGradient.frame = self.mainView.bounds;
+        return theViewGradient;
+        
+    } else {
+        UIColor *topColor = [UIColor colorWithRed:50.0/255.0 green:50.0/255.0 blue:50.0/255.0 alpha:1.0];
+        UIColor *bottomColor = [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0];
+        // Create the gradient
+        CAGradientLayer *theViewGradient = [CAGradientLayer layer];
+        theViewGradient.colors = [NSArray arrayWithObjects: (id)topColor.CGColor, (id)bottomColor.CGColor, nil];
+        theViewGradient.frame = self.mainView.bounds;
+        return theViewGradient;
+        
+    }
+    
+}
 
 
 

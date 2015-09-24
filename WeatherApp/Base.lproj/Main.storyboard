@@ -568,7 +568,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PI6-Ol-O8L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1912" y="666"/>
+            <point key="canvasLocation" x="1988" y="678"/>
         </scene>
         <!--Daily Weather Detail-->
         <scene sceneID="C9c-a5-3ar">
