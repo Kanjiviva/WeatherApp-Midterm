@@ -14,10 +14,13 @@
 #import "Constants.h"
 #import "WeatherSearchViewController.h"
 #import "Location.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface MapViewController () <MKMapViewDelegate, LocationManagerDelegate, WeatherSearchViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+
+@property (strong, nonatomic) AVAudioPlayer *mySoundPlayer;
 
 @property (strong, nonatomic) NSMutableArray *weathers;
 @property (strong, nonatomic) NSMutableArray *allLists;
@@ -54,6 +57,13 @@
     
     [[LocationManager sharedLocationManager] startLocationManager:self];
     
+    NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"rain" ofType:@"mp3"]];
+    
+    NSError *error = nil;
+    
+    self.mySoundPlayer =[[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:&error];
+    self.mySoundPlayer .volume=0.8f; //between 0 and 1
+    [self.mySoundPlayer prepareToPlay];
     [self favoriteLocationsPin];
     
     
@@ -300,14 +310,23 @@
         
         if ([weatherLocation.condition isEqualToString:@"Rain"]) {
             temp.image = [UIImage imageNamed:@"Rain-26.png"];
+//            AudioServicesPlaySystemSound(_soundID);
+            if ([annotation isKindOfClass:[MapPin class]]) {
+                [self.mySoundPlayer play];
+            }
+            
         } else if ([weatherLocation.condition isEqualToString:@"Clouds"]) {
             temp.image = [UIImage imageNamed:@"Clouds-26.png"];
+//            AudioServicesPlaySystemSound(_soundID);
         } else if ([weatherLocation.condition isEqualToString:@"Clear"]) {
             temp.image = [UIImage imageNamed:@"Sun-24.png"];
+//            AudioServicesPlaySystemSound(_soundID);
         } else if ([weatherLocation.condition isEqualToString:@"Snow"]) {
             temp.image = [UIImage imageNamed:@"Snow-24.png"];
+//            AudioServicesPlaySystemSound(_soundID);
         } else if ([weatherLocation.condition isEqualToString:@"Mist"]) {
             temp.image = [UIImage imageNamed:@"Fog Day-24.png"];
+//            AudioServicesPlaySystemSound(_soundID);
         }
         
         temp.contentMode = UIViewContentModeScaleAspectFit;

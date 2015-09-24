@@ -24,6 +24,9 @@
 		AA2DD3771BB45B2A00EA0868 /* Flag Filled -24.png in Resources */ = {isa = PBXBuildFile; fileRef = AA2DD3761BB45B2A00EA0868 /* Flag Filled -24.png */; settings = {ASSET_TAGS = (); }; };
 		AA2DD37A1BB47FB800EA0868 /* Right-24.png in Resources */ = {isa = PBXBuildFile; fileRef = AA2DD3781BB47FB800EA0868 /* Right-24.png */; settings = {ASSET_TAGS = (); }; };
 		AA2DD37B1BB47FB800EA0868 /* Left-24.png in Resources */ = {isa = PBXBuildFile; fileRef = AA2DD3791BB47FB800EA0868 /* Left-24.png */; settings = {ASSET_TAGS = (); }; };
+		AA2DD37D1BB493C300EA0868 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2DD37C1BB493C300EA0868 /* AudioToolbox.framework */; };
+		AA2DD37F1BB494C200EA0868 /* rain.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA2DD37E1BB494C100EA0868 /* rain.mp3 */; settings = {ASSET_TAGS = (); }; };
+		AA2DD3811BB496BC00EA0868 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2DD3801BB496BC00EA0868 /* AVFoundation.framework */; };
 		AA4C1C4C1BAE20FE0032B50F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1C4B1BAE20FE0032B50F /* main.m */; };
 		AA4C1C4F1BAE20FE0032B50F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1C4E1BAE20FE0032B50F /* AppDelegate.m */; };
 		AA4C1C551BAE20FE0032B50F /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C1C541BAE20FE0032B50F /* MapViewController.m */; };
@@ -110,6 +113,9 @@
 		AA2DD3761BB45B2A00EA0868 /* Flag Filled -24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Flag Filled -24.png"; sourceTree = "<group>"; };
 		AA2DD3781BB47FB800EA0868 /* Right-24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Right-24.png"; sourceTree = "<group>"; };
 		AA2DD3791BB47FB800EA0868 /* Left-24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Left-24.png"; sourceTree = "<group>"; };
+		AA2DD37C1BB493C300EA0868 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		AA2DD37E1BB494C100EA0868 /* rain.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = rain.mp3; sourceTree = "<group>"; };
+		AA2DD3801BB496BC00EA0868 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AA4C1C471BAE20FE0032B50F /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA4C1C4B1BAE20FE0032B50F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AA4C1C4D1BAE20FE0032B50F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -170,6 +176,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA2DD3811BB496BC00EA0868 /* AVFoundation.framework in Frameworks */,
+				AA2DD37D1BB493C300EA0868 /* AudioToolbox.framework in Frameworks */,
 				AA4C1CB71BAF519F0032B50F /* CoreData.framework in Frameworks */,
 				AA4C1C831BAE22180032B50F /* CoreLocation.framework in Frameworks */,
 				AA4C1C811BAE22120032B50F /* MapKit.framework in Frameworks */,
@@ -196,6 +204,8 @@
 		AA2DD35E1BB350A900EA0868 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA2DD3801BB496BC00EA0868 /* AVFoundation.framework */,
+				AA2DD37C1BB493C300EA0868 /* AudioToolbox.framework */,
 				AA2DD35F1BB350A900EA0868 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
@@ -267,6 +277,7 @@
 				AA4C1CB81BAF55600032B50F /* CustomTableViewCell.h */,
 				AA4C1CB91BAF55600032B50F /* CustomTableViewCell.m */,
 				AA4C1C591BAE20FE0032B50F /* Assets.xcassets */,
+				AA2DD37E1BB494C100EA0868 /* rain.mp3 */,
 				AA2DD3781BB47FB800EA0868 /* Right-24.png */,
 				AA2DD3791BB47FB800EA0868 /* Left-24.png */,
 				AA2DD3761BB45B2A00EA0868 /* Flag Filled -24.png */,
@@ -488,6 +499,7 @@
 				AA2DD37B1BB47FB800EA0868 /* Left-24.png in Resources */,
 				AA4C1C581BAE20FE0032B50F /* Main.storyboard in Resources */,
 				AA2DD37A1BB47FB800EA0868 /* Right-24.png in Resources */,
+				AA2DD37F1BB494C200EA0868 /* rain.mp3 in Resources */,
 				AA2DD3771BB45B2A00EA0868 /* Flag Filled -24.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
