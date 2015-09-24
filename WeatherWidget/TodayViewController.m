@@ -110,7 +110,7 @@
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.locationLabel.text = [NSString stringWithFormat:@"%@%@", name, currentTempString];
+                self.locationLabel.text = [NSString stringWithFormat:@"%@  %@", name, currentTempString];
                 
 //                if ([condition isEqualToString:@"Rain"]) {
 //                    self.iconImageView.image = [UIImage imageNamed:@"Rain-26.png"];
