@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E26C9C71BB47F710098788E /* clear-day.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E26C9C11BB47F710098788E /* clear-day.png */; settings = {ASSET_TAGS = (); }; };
+		4E26C9C81BB47F710098788E /* cloudy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E26C9C21BB47F710098788E /* cloudy.png */; settings = {ASSET_TAGS = (); }; };
+		4E26C9C91BB47F710098788E /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E26C9C31BB47F710098788E /* default.png */; settings = {ASSET_TAGS = (); }; };
+		4E26C9CA1BB47F710098788E /* fog.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E26C9C41BB47F710098788E /* fog.png */; settings = {ASSET_TAGS = (); }; };
+		4E26C9CB1BB47F710098788E /* rain.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E26C9C51BB47F710098788E /* rain.png */; settings = {ASSET_TAGS = (); }; };
+		4E26C9CC1BB47F710098788E /* snow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E26C9C61BB47F710098788E /* snow.png */; settings = {ASSET_TAGS = (); }; };
 		4EB8C57F1BB204A400D46B05 /* WeatherDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB8C57E1BB204A400D46B05 /* WeatherDetailTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		4EC820291BB23F2100D0273C /* WeatherDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC820281BB23F2100D0273C /* WeatherDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		4EE009061BB25743005C7B16 /* WeeklyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE009051BB25743005C7B16 /* WeeklyDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -83,6 +89,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4E26C9C11BB47F710098788E /* clear-day.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clear-day.png"; sourceTree = "<group>"; };
+		4E26C9C21BB47F710098788E /* cloudy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloudy.png; sourceTree = "<group>"; };
+		4E26C9C31BB47F710098788E /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
+		4E26C9C41BB47F710098788E /* fog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fog.png; sourceTree = "<group>"; };
+		4E26C9C51BB47F710098788E /* rain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rain.png; sourceTree = "<group>"; };
+		4E26C9C61BB47F710098788E /* snow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = snow.png; sourceTree = "<group>"; };
 		4EB8C57D1BB204A400D46B05 /* WeatherDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherDetailTableViewCell.h; sourceTree = "<group>"; };
 		4EB8C57E1BB204A400D46B05 /* WeatherDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherDetailTableViewCell.m; sourceTree = "<group>"; };
 		4EC820271BB23F2100D0273C /* WeatherDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherDetailViewController.h; sourceTree = "<group>"; };
@@ -192,6 +204,12 @@
 		AA2DD3611BB350A900EA0868 /* WeatherWidget */ = {
 			isa = PBXGroup;
 			children = (
+				4E26C9C11BB47F710098788E /* clear-day.png */,
+				4E26C9C21BB47F710098788E /* cloudy.png */,
+				4E26C9C31BB47F710098788E /* default.png */,
+				4E26C9C41BB47F710098788E /* fog.png */,
+				4E26C9C51BB47F710098788E /* rain.png */,
+				4E26C9C61BB47F710098788E /* snow.png */,
 				AA2DD3621BB350A900EA0868 /* TodayViewController.h */,
 				AA2DD3631BB350A900EA0868 /* TodayViewController.m */,
 				AA2DD3651BB350A900EA0868 /* MainInterface.storyboard */,
@@ -451,7 +469,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E26C9C71BB47F710098788E /* clear-day.png in Resources */,
+				4E26C9C81BB47F710098788E /* cloudy.png in Resources */,
 				AA2DD3671BB350A900EA0868 /* MainInterface.storyboard in Resources */,
+				4E26C9CA1BB47F710098788E /* fog.png in Resources */,
+				4E26C9C91BB47F710098788E /* default.png in Resources */,
+				4E26C9CC1BB47F710098788E /* snow.png in Resources */,
+				4E26C9CB1BB47F710098788E /* rain.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
