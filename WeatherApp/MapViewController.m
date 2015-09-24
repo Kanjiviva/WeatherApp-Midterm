@@ -222,23 +222,50 @@
 }
 
 - (IBAction)movingRight:(UIButton *)sender {
-    self.currentIndex++;
-    if (self.currentIndex < [self.allLists count]) {
-        [self allWeatherLocations:self.allLists[self.currentIndex]];
+    
+    if ([self.allLists count] != 0) {
+        self.currentIndex++;
+        if (self.currentIndex < [self.allLists count]) {
+            [self allWeatherLocations:self.allLists[self.currentIndex]];
+        } else {
+            self.currentIndex = 0;
+            [self allWeatherLocations:self.allLists[self.currentIndex]];
+        }
     } else {
-        self.currentIndex = 0;
-        [self allWeatherLocations:self.allLists[self.currentIndex]];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"OOPS!"
+                                                                       message:@"There's nothing in you list yet! Add them NOW!"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+        
+        [alert addAction:action];
+        
+        [self presentViewController:alert animated:YES completion:nil];
     }
+    
 }
 
 - (IBAction)movingLeft:(UIButton *)sender {
-    self.currentIndex--;
-    if (self.currentIndex >=0) {
-        [self allWeatherLocations:self.allLists[self.currentIndex]];
+    if ([self.allLists count] != 0) {
+        self.currentIndex--;
+        if (self.currentIndex >=0) {
+            [self allWeatherLocations:self.allLists[self.currentIndex]];
+        } else {
+            self.currentIndex = (int)[self.allLists count] - 1;
+            [self allWeatherLocations:self.allLists[self.currentIndex]];
+        }
     } else {
-        self.currentIndex = (int)[self.allLists count] - 1;
-        [self allWeatherLocations:self.allLists[self.currentIndex]];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"OOPS!"
+                                                                       message:@"There's nothing in you list yet! Add them NOW!"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+        
+        [alert addAction:action];
+        
+        [self presentViewController:alert animated:YES completion:nil];
     }
+    
 }
 
 - (IBAction)findCurrentLocation:(UIBarButtonItem *)sender {
@@ -311,6 +338,7 @@
         MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MapPin"];
         annotationView.enabled = YES;
         annotationView.canShowCallout = YES;
+        [annotationView setSelected:YES animated:YES];
         
         if ([annotation isKindOfClass:[WeatherLocation class]]) {
             annotationView.image = [UIImage imageNamed:@"Flag Filled -24.png"];
@@ -409,12 +437,6 @@
             
             NSString *condition = [[weathers objectAtIndex:0] objectForKey:@"main"];
             
-            //            if ([condition isEqualToString:@"Rain"] && [weathers objectAtIndex:1] != nil) {
-            //                condition = [[weathers objectAtIndex:1] objectForKey:@"main"];
-            //            } else {
-            //                condition = [[weathers objectAtIndex:0] objectForKey:@"main"];
-            //            }
-            
             NSDictionary *sys = [weatherDict objectForKey:@"sys"];
             
             NSString *country = [sys objectForKey:@"country"];
@@ -439,7 +461,6 @@
                     [self.mapView addAnnotation:pin];
                 } else {
                     [self.mapView removeAnnotations:self.allPins];
-                    //                    [self.allPins removeAllObjects];
                     [self.mapView addAnnotation:pin];
                     
                 }

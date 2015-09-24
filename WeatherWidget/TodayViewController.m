@@ -39,8 +39,16 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc]
+                                             initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    
+    activityView.center=self.view.center;
+    [activityView startAnimating];
+    [self.view addSubview:activityView];
+    
+    activityView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
     [[LocationManager sharedLocationManager] startLocationManager:self];
-    [self jsonRequest];
+    [self jsonRequest:activityView];
 }
 
 //- (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
@@ -69,24 +77,15 @@
     // If there's no update required, use NCUpdateResultNoData
     // If there's an update, use NCUpdateResultNewData
 
-    [self jsonRequest];
+//    [self jsonRequest];
     completionHandler(NCUpdateResultNewData);
 }
 
 #pragma mark - JSON Request -
 
-- (void)jsonRequest {
+- (void)jsonRequest:(UIActivityIndicatorView *)activityView {
     
     NSString *stringURL = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f&APPID=%@", [LocationManager sharedLocationManager].currentLocation.coordinate.latitude, [LocationManager sharedLocationManager].currentLocation.coordinate.longitude, API_KEY];
-    
-    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc]
-                                             initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    
-    activityView.center=self.view.center;
-    [activityView startAnimating];
-    [self.view addSubview:activityView];
-    
-    activityView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
     
     NSURLSession *session = [NSURLSession sharedSession];
     
