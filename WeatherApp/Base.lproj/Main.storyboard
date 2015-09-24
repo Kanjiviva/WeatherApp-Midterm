@@ -11,39 +11,39 @@
         <scene sceneID="sNG-IT-B8J">
             <objects>
                 <tableViewController id="PDV-b5-NZS" customClass="WeatherListTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="nyy-tZ-FAd">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="nyy-tZ-FAd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Bxt-4r-yXa" customClass="CustomTableViewCell">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="80" id="Bxt-4r-yXa" customClass="CustomTableViewCell">
+                                <rect key="frame" x="0.0" y="92" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bxt-4r-yXa" id="8BG-DE-gxF">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PDH-4s-Psw">
-                                            <rect key="frame" x="558" y="11" width="34" height="21"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RwU-Hc-EKS">
-                                            <rect key="frame" x="74" y="11" width="39" height="21"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                            <rect key="frame" x="552" y="11" width="40" height="57"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GP4-9d-yFA">
-                                            <rect key="frame" x="25" y="11" width="39" height="21"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                            <rect key="frame" x="25" y="29" width="41" height="22"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RwU-Hc-EKS">
+                                            <rect key="frame" x="76" y="32" width="30" height="16"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="13"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YR6-O8-eJx">
-                                            <rect key="frame" x="281" y="11" width="39" height="21"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                            <rect key="frame" x="451" y="29" width="41" height="22"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -61,8 +61,8 @@
                                         <constraint firstItem="PDH-4s-Psw" firstAttribute="centerY" secondItem="8BG-DE-gxF" secondAttribute="centerY" id="Xgw-7O-bse"/>
                                         <constraint firstItem="RwU-Hc-EKS" firstAttribute="leading" secondItem="GP4-9d-yFA" secondAttribute="trailing" constant="10" id="byk-s4-190"/>
                                         <constraint firstAttribute="bottom" secondItem="RwU-Hc-EKS" secondAttribute="bottom" id="e7K-dg-h5O"/>
+                                        <constraint firstItem="PDH-4s-Psw" firstAttribute="leading" secondItem="YR6-O8-eJx" secondAttribute="trailing" constant="60" id="eYL-i0-QvZ"/>
                                         <constraint firstItem="RwU-Hc-EKS" firstAttribute="centerY" secondItem="8BG-DE-gxF" secondAttribute="centerY" id="feN-WJ-m6m"/>
-                                        <constraint firstItem="YR6-O8-eJx" firstAttribute="centerX" secondItem="8BG-DE-gxF" secondAttribute="centerX" id="mJZ-jD-z6A"/>
                                         <constraint firstItem="GP4-9d-yFA" firstAttribute="top" secondItem="8BG-DE-gxF" secondAttribute="top" id="ufZ-aR-gUn"/>
                                         <constraint firstItem="YR6-O8-eJx" firstAttribute="centerY" secondItem="8BG-DE-gxF" secondAttribute="centerY" id="z11-fy-FG6"/>
                                     </constraints>
@@ -77,7 +77,7 @@
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.68574416039999997" green="0.68574416039999997" blue="0.68574416039999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.73409880055151522" green="0.73409880055151522" blue="0.73409880055151522" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="conditionLabel" destination="YR6-O8-eJx" id="mDU-Ih-NVW"/>
                                     <outlet property="countryLabel" destination="RwU-Hc-EKS" id="SWo-JQ-cQ9"/>
@@ -765,6 +765,6 @@
         <image name="valueBox" width="55" height="47"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6gC-wb-f96"/>
+        <segue reference="PTX-S6-xaM"/>
     </inferredMetricsTieBreakers>
 </document>

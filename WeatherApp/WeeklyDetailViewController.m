@@ -108,6 +108,15 @@
         theViewGradient.frame = self.view.bounds;
         return theViewGradient;
         
+    }  else if ([condition isEqualToString:@"Snow"]){
+        UIColor *topColor = [UIColor colorWithRed:0.0/255.0 green:178.0/255.0 blue:255.0/255.0 alpha:1.0];
+        UIColor *bottomColor = [UIColor colorWithRed:0.0/255.0 green:231.0/255.0 blue:255.0/255.0 alpha:1.0];
+        // Create the gradient
+        CAGradientLayer *theViewGradient = [CAGradientLayer layer];
+        theViewGradient.colors = [NSArray arrayWithObjects: (id)topColor.CGColor, (id)bottomColor.CGColor, nil];
+        theViewGradient.frame = self.view.bounds;
+        return theViewGradient;
+        
     } else {
         UIColor *topColor = [UIColor colorWithRed:50.0/255.0 green:50.0/255.0 blue:50.0/255.0 alpha:1.0];
         UIColor *bottomColor = [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0];
