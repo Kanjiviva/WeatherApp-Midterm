@@ -36,7 +36,7 @@
 - (void)configureView {
     // Create the colors
     UIColor *topColor = [UIColor colorWithRed:50.0/255.0 green:50.0/255.0 blue:50.0/255.0 alpha:1.0];
-    UIColor *bottomColor = [UIColor colorWithRed:56.0/255.0 green:56.0/255.0 blue:56.0/255.0 alpha:1.0];
+    UIColor *bottomColor = [UIColor colorWithRed:100.0/255.0 green:100.0/255.0 blue:100.0/255.0 alpha:1.0];
     // Create the gradient
     CAGradientLayer *theViewGradient = [CAGradientLayer layer];
     theViewGradient.colors = [NSArray arrayWithObjects: (id)topColor.CGColor, (id)bottomColor.CGColor, nil];
@@ -66,6 +66,8 @@
         image = [UIImage imageNamed:@"clear-day.png"];
     } else if ([condition isEqualToString:@"Snow"]) {
         image = [UIImage imageNamed:@"snow.png"];
+    } else if([condition isEqualToString:@"Mist"]) {
+        image = [UIImage imageNamed:@"fog.png"];
     } else {
         image = [UIImage imageNamed:@"default.png"];
     }

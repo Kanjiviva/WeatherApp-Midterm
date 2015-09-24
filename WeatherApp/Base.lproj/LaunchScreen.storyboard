@@ -15,8 +15,36 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="˚ C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcK-k0-Bri">
+                                <rect key="frame" x="218" y="214" width="164" height="172"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLightItalic" family="Helvetica Neue" pointSize="150"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Derrick &amp; Steve" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tM0-n3-QeF">
+                                <rect key="frame" x="246" y="547" width="109" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lighthouse Labs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPX-d4-Y9s">
+                                <rect key="frame" x="242" y="518" width="117" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-ThinItalic" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hcK-k0-Bri" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Jyh-Xq-bgS"/>
+                            <constraint firstItem="cPX-d4-Y9s" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="RmJ-6f-a5N"/>
+                            <constraint firstItem="tM0-n3-QeF" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="d1v-Nd-Men"/>
+                            <constraint firstItem="hcK-k0-Bri" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="fnR-VR-H0q"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="tM0-n3-QeF" secondAttribute="bottom" constant="32" id="gum-ui-a2J"/>
+                            <constraint firstItem="tM0-n3-QeF" firstAttribute="top" secondItem="cPX-d4-Y9s" secondAttribute="bottom" constant="8" id="sYv-yg-zTd"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>

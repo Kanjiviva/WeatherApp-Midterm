@@ -32,6 +32,8 @@
      self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     self.dataStack = [DataStack new];
+    //self.tableView.backgroundView = nil;
+    self.tableView.backgroundColor = [UIColor grayColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -102,7 +104,7 @@
     cell.locationLabel.text = weahterLocation.locationName;
     cell.temperatureLabel.text = [NSString stringWithFormat:@"%.1f C", weahterLocation.currentTemperature];
     cell.countryLabel.text = weahterLocation.country;
-    
+    cell.conditionLabel.text = weahterLocation.condition;
     return cell;
 }
 
