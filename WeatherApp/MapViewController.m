@@ -359,7 +359,6 @@
         
         if ([weatherLocation.condition isEqualToString:@"Rain"]) {
             temp.image = [UIImage imageNamed:@"Rain-26.png"];
-            
             if ([annotation isKindOfClass:[MapPin class]]) {
                 NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"rain" ofType:@"mp3"]];
                 [self differentSound:soundURL];

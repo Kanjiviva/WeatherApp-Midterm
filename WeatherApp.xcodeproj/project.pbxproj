@@ -24,7 +24,6 @@
 		AA2DD3771BB45B2A00EA0868 /* Flag Filled -24.png in Resources */ = {isa = PBXBuildFile; fileRef = AA2DD3761BB45B2A00EA0868 /* Flag Filled -24.png */; settings = {ASSET_TAGS = (); }; };
 		AA2DD37A1BB47FB800EA0868 /* Right-24.png in Resources */ = {isa = PBXBuildFile; fileRef = AA2DD3781BB47FB800EA0868 /* Right-24.png */; settings = {ASSET_TAGS = (); }; };
 		AA2DD37B1BB47FB800EA0868 /* Left-24.png in Resources */ = {isa = PBXBuildFile; fileRef = AA2DD3791BB47FB800EA0868 /* Left-24.png */; settings = {ASSET_TAGS = (); }; };
-		AA2DD37D1BB493C300EA0868 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2DD37C1BB493C300EA0868 /* AudioToolbox.framework */; };
 		AA2DD37F1BB494C200EA0868 /* rain.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA2DD37E1BB494C100EA0868 /* rain.mp3 */; settings = {ASSET_TAGS = (); }; };
 		AA2DD3811BB496BC00EA0868 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2DD3801BB496BC00EA0868 /* AVFoundation.framework */; };
 		AA2DD3831BB4A26100EA0868 /* clear.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA2DD3821BB4A26100EA0868 /* clear.mp3 */; settings = {ASSET_TAGS = (); }; };
@@ -185,7 +184,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA2DD3811BB496BC00EA0868 /* AVFoundation.framework in Frameworks */,
-				AA2DD37D1BB493C300EA0868 /* AudioToolbox.framework in Frameworks */,
 				AA4C1CB71BAF519F0032B50F /* CoreData.framework in Frameworks */,
 				AA4C1C831BAE22180032B50F /* CoreLocation.framework in Frameworks */,
 				AA4C1C811BAE22120032B50F /* MapKit.framework in Frameworks */,
@@ -752,6 +750,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = WeatherApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Steve.WeatherApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -766,6 +765,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = WeatherApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Steve.WeatherApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
