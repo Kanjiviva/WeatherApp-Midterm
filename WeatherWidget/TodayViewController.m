@@ -26,10 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-//    self.locationLabel.text = @"testing";
     [[LocationManager sharedLocationManager] startLocationManager:self];
-//    [self jsonRequest];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,28 +44,9 @@
     [self.view addSubview:activityView];
     
     activityView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
-    [[LocationManager sharedLocationManager] startLocationManager:self];
+//    [[LocationManager sharedLocationManager] startLocationManager:self];
     [self jsonRequest:activityView];
 }
-
-//- (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
-//    self.completionHandler = completionHandler;
-//    // Do work.
-//    [self jsonRequest];
-////    self.completionHandler(NCUpdateResultNewData);
-//}
-//
-//
-//- (void)viewDidDisappear:(BOOL)animated {
-//    [super viewDidDisappear:animated];
-//    if (!self.hasSignaled) [self signalComplete:NCUpdateResultFailed];
-//}
-//
-//- (void)signalComplete:(NCUpdateResult)updateResult {
-//    NSLog(@"Signaling complete: %lu", updateResult);
-//    self.hasSignaled = YES;
-//    if (self.completionHandler) self.completionHandler(updateResult);
-//}
 
 - (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
     // Perform any setup necessary in order to update the view.
@@ -79,6 +57,10 @@
 
 //    [self jsonRequest];
     completionHandler(NCUpdateResultNewData);
+}
+- (IBAction)tapRecognizer:(UITapGestureRecognizer *)sender {
+    NSURL *pjURL = [NSURL URLWithString:@"AppUrlType://home"];
+    [self.extensionContext openURL:pjURL completionHandler:nil];
 }
 
 #pragma mark - JSON Request -
