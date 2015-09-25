@@ -209,7 +209,8 @@
 
 
 #pragma mark - IBActions -
-- (IBAction)longPressRecognizer:(UILongPressGestureRecognizer *)sender {
+
+- (IBAction)tapRecognizer:(UITapGestureRecognizer *)sender {
     NSLog(@"TAPPED!");
     
     CGPoint touchPoint = [sender locationInView:self.mapView];
@@ -221,11 +222,6 @@
     
     
     [self jsonRequest:stringURL lat:location.latitude lng:location.longitude];
-    
-}
-
-- (IBAction)tapRecognizer:(UITapGestureRecognizer *)sender {
-    
     
     
 }
@@ -362,7 +358,7 @@
         }
         
         
-        annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeContactAdd];
         
         // View for left accessory
         
@@ -461,7 +457,7 @@
             
             Weather *weather = [[Weather alloc] initWithLng:[NSNumber numberWithFloat:lng]  lat:[NSNumber numberWithFloat:lat] cityName:cityName condition:condition temp:[NSNumber numberWithFloat:temperatureInCelsius]];
             
-            MapPin *pin = [[MapPin alloc] initWithCoordinate:CLLocationCoordinate2DMake(lat, lng) andTitle:[NSString stringWithFormat:@"City: %@", cityName] andSubtitle:[NSString stringWithFormat:@"%.1f C", temperatureInCelsius]];
+            MapPin *pin = [[MapPin alloc] initWithCoordinate:CLLocationCoordinate2DMake(lat, lng) andTitle:[NSString stringWithFormat:@"City: %@", cityName] andSubtitle:[NSString stringWithFormat:@"%.1fºC", temperatureInCelsius]];
             
             pin.condition = condition;
             pin.cityName = cityName;

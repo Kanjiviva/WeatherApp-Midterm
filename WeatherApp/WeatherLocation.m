@@ -22,7 +22,7 @@
 
 
 -(NSString *)subtitle {
-    return [NSString stringWithFormat:@"%0.1f",self.currentTemperature];
+    return [NSString stringWithFormat:@"%0.1fºC",self.currentTemperature];
 }
 
 @end
