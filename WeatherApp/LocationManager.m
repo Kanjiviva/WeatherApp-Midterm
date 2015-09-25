@@ -32,6 +32,8 @@
     self.locationManager.distanceFilter = 10; // whenever we move
     self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
     [_locationManager requestAlwaysAuthorization];
+//    [_locationManager requestWhenInUseAuthorization];
+
     [_locationManager startUpdatingLocation];
     
     
@@ -47,10 +49,13 @@
             [self setUpLocation];
             
         }else{
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Location services are disabled. Please go into Settings > Privacy > Location to enable them for Play "
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Location services are disabled. Please go into Settings > Privacy > Location to enable them"
                                                                            message:nil
                                                                     preferredStyle:UIAlertControllerStyleAlert];
-            
+            UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
+                                                             style:UIAlertActionStyleDefault
+                                                           handler:nil];
+            [alert addAction:action];
             [UIViewController presentViewController:alert animated:YES completion:nil];
             
         }
