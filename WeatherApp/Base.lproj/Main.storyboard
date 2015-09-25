@@ -230,6 +230,7 @@
                                 <connections>
                                     <outlet property="delegate" destination="8rJ-Kc-sve" id="GLl-FA-QT0"/>
                                     <outletCollection property="gestureRecognizers" destination="lPB-TJ-SXY" appends="YES" id="aci-bX-qo6"/>
+                                    <outletCollection property="gestureRecognizers" destination="QUa-k7-ePo" appends="YES" id="mxw-2g-BiQ"/>
                                 </connections>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n5a-jb-hv3">
@@ -291,6 +292,11 @@
                         <action selector="tapRecognizer:" destination="8rJ-Kc-sve" id="OM7-3Q-hKk"/>
                     </connections>
                 </tapGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="1" id="QUa-k7-ePo">
+                    <connections>
+                        <action selector="longPressRecognizer:" destination="8rJ-Kc-sve" id="euj-I1-e4D"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="974" y="-406"/>
         </scene>
@@ -766,6 +772,6 @@
         <image name="valueBox" width="55" height="47"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PTX-S6-xaM"/>
+        <segue reference="6gC-wb-f96"/>
     </inferredMetricsTieBreakers>
 </document>

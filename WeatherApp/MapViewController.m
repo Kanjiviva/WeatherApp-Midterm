@@ -28,7 +28,6 @@
 
 @property (strong, nonatomic) Location *location;
 
-@property (nonatomic) BOOL shouldPlay;
 //@property (strong, nonatomic) WeatherLocation *weatherLocation;
 
 @property (nonatomic) int currentIndex;
@@ -41,9 +40,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.shouldPlay = YES;
-    self.currentIndex = 0;
     
+    self.currentIndex = 0;
     self.mapView.delegate = self;
     
     self.mapView.showsUserLocation = YES;
@@ -81,12 +79,15 @@
 
 - (void)differentSound:(NSURL *)soundURL {
     
+//    [self.mapView setUserInteractionEnabled:NO];
     NSError *error = nil;
     self.mySoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:&error];
     self.mySoundPlayer .volume=0.8f; //between 0 and 1
     [self.mySoundPlayer prepareToPlay];
+//    [self.mapView setUserInteractionEnabled:NO];
     [self.mySoundPlayer play];
-    self.shouldPlay = NO;
+    
+//    self.shouldPlay = NO;
 }
 
 #pragma mark - Location Manager -
@@ -119,15 +120,19 @@
     if ([self.location.condition isEqualToString:@"Rain"]) {
         NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"rain" ofType:@"mp3"]];
         [self differentSound:soundURL];
+        
     } else if ([self.location.condition isEqualToString:@"Clear"]) {
         NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"clear" ofType:@"mp3"]];
         [self differentSound:soundURL];
+        
     } else if ([self.location.condition isEqualToString:@"Thunderstorm"]) {
         NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"thunderstorm" ofType:@"mp3"]];
         [self differentSound:soundURL];
+        
     } else if ([self.location.condition isEqualToString:@"Clouds"]) {
         NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"clouds" ofType:@"mp3"]];
         [self differentSound:soundURL];
+        
     }
     
     MKCoordinateRegion region;
@@ -204,9 +209,7 @@
 
 
 #pragma mark - IBActions -
-
-- (IBAction)tapRecognizer:(UITapGestureRecognizer *)sender {
-    
+- (IBAction)longPressRecognizer:(UILongPressGestureRecognizer *)sender {
     NSLog(@"TAPPED!");
     
     CGPoint touchPoint = [sender locationInView:self.mapView];
@@ -218,6 +221,12 @@
     
     
     [self jsonRequest:stringURL lat:location.latitude lng:location.longitude];
+    
+}
+
+- (IBAction)tapRecognizer:(UITapGestureRecognizer *)sender {
+    
+    
     
 }
 
@@ -336,6 +345,12 @@
     if ([annotation isKindOfClass:[WeatherLocation class]] || [annotation isKindOfClass:[MapPin class]] ) {
         
         MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MapPin"];
+        
+//        [NSTimer scheduledTimerWithTimeInterval:2.0
+//                                         target:annotationView
+//                                       selector:nil
+//                                       userInfo:nil
+//                                        repeats:NO];
         annotationView.enabled = YES;
         annotationView.canShowCallout = YES;
         [annotationView setSelected:YES animated:YES];
@@ -362,6 +377,7 @@
             if ([annotation isKindOfClass:[MapPin class]]) {
                 NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"rain" ofType:@"mp3"]];
                 [self differentSound:soundURL];
+                
             }
             
         } else if ([weatherLocation.condition isEqualToString:@"Clouds"]) {
@@ -369,6 +385,7 @@
             if ([annotation isKindOfClass:[MapPin class]]) {
                 NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"clouds" ofType:@"mp3"]];
                 [self differentSound:soundURL];
+                
             }
             
         } else if ([weatherLocation.condition isEqualToString:@"Clear"]) {
@@ -376,6 +393,7 @@
             if ([annotation isKindOfClass:[MapPin class]]) {
                 NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"clear" ofType:@"mp3"]];
                 [self differentSound:soundURL];
+                
             }
         } else if ([weatherLocation.condition isEqualToString:@"Snow"]) {
             temp.image = [UIImage imageNamed:@"Snow-24.png"];
@@ -388,6 +406,7 @@
             if ([annotation isKindOfClass:[MapPin class]]) {
                 NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"thunderstorm" ofType:@"mp3"]];
                 [self differentSound:soundURL];
+                
             }
         }
         
